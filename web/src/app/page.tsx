@@ -25,7 +25,7 @@ function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 20% 50%, rgba(0, 212, 170, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(78, 205, 196, 0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 20% 50%, rgba(185, 28, 28, 0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(220, 38, 38, 0.04) 0%, transparent 50%)",
         }}
       />
       {/* Grid pattern overlay */}
@@ -34,11 +34,11 @@ function Hero() {
       {/* Decorative elements */}
       <div
         className="absolute top-1/4 right-10 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: "rgba(0, 212, 170, 0.08)" }}
+        style={{ background: "rgba(185, 28, 28, 0.06)" }}
       />
       <div
         className="absolute bottom-1/4 left-10 h-48 w-48 rounded-full blur-3xl"
-        style={{ background: "rgba(78, 205, 196, 0.06)" }}
+        style={{ background: "rgba(220, 38, 38, 0.04)" }}
       />
 
       <div className="relative mx-auto max-w-7xl px-6 py-32">
@@ -391,11 +391,11 @@ function CTA() {
         {/* Background decoration */}
         <div
           className="absolute -top-20 -right-20 h-64 w-64 rounded-full blur-3xl"
-          style={{ background: "rgba(0, 212, 170, 0.12)" }}
+          style={{ background: "rgba(185, 28, 28, 0.08)" }}
         />
         <div
           className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full blur-3xl"
-          style={{ background: "rgba(78, 205, 196, 0.08)" }}
+          style={{ background: "rgba(220, 38, 38, 0.06)" }}
         />
 
         <div className="relative mx-auto max-w-2xl text-center">

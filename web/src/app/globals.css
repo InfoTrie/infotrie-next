@@ -2,7 +2,7 @@
 
 /* ============================================================
    CSS Custom Properties — Design Tokens
-   InfoTrie Brand Colors — Light Theme with Teal Accent
+   InfoTrie Brand Colors — Light Theme with Red Accent
    ============================================================ */
 
 :root {
@@ -11,16 +11,16 @@
   --color-secondary: #f8fafb;
   --color-tertiary: #f1f5f9;
 
-  /* InfoTrie Teal brand accent */
-  --color-accent: #00a88a;
-  --color-accent-hover: #008f75;
-  --color-accent-light: #00d4aa;
-  --color-accent-soft: rgba(0, 168, 138, 0.08);
+  /* InfoTrie Red brand accent (matches logo) */
+  --color-accent: #B91C1C;
+  --color-accent-hover: #991B1B;
+  --color-accent-light: #DC2626;
+  --color-accent-soft: rgba(185, 28, 28, 0.08);
 
-  /* Secondary accent — coral for CTA buttons */
-  --color-coral: #e63946;
-  --color-coral-hover: #d32f3d;
-  --color-coral-soft: rgba(230, 57, 70, 0.08);
+  /* Secondary accent — same red for CTA buttons */
+  --color-coral: #B91C1C;
+  --color-coral-hover: #991B1B;
+  --color-coral-soft: rgba(185, 28, 28, 0.08);
 
   /* Text colors */
   --color-text: #1a202c;
@@ -102,11 +102,11 @@ code, pre, .font-mono {
 
 /* Glow effects */
 .glow-accent {
-  box-shadow: 0 0 40px rgba(0, 168, 138, 0.15);
+  box-shadow: 0 0 40px rgba(185, 28, 28, 0.15);
 }
 
 .glow-coral {
-  box-shadow: 0 0 40px rgba(230, 57, 70, 0.1);
+  box-shadow: 0 0 40px rgba(185, 28, 28, 0.1);
 }
 
 /* Hover lift effect */
@@ -130,7 +130,7 @@ code, pre, .font-mono {
 
 .btn-primary:hover {
   background: var(--color-coral-hover);
-  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.25);
+  box-shadow: 0 8px 24px rgba(185, 28, 28, 0.25);
 }
 
 .btn-secondary {
@@ -218,7 +218,7 @@ code, pre, .font-mono {
 
 /* Selection */
 ::selection {
-  background: rgba(0, 168, 138, 0.2);
+  background: rgba(185, 28, 28, 0.2);
   color: var(--color-text);
 }
 
@@ -245,11 +245,11 @@ code, pre, .font-mono {
 /* Background patterns - subtle for light theme */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(0, 168, 138, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 168, 138, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(185, 28, 28, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185, 28, 28, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(0, 168, 138, 0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(185, 28, 28, 0.05) 0%, transparent 60%);
 }
