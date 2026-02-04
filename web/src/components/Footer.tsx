@@ -41,7 +41,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3">
               <div className="relative h-12 w-12 overflow-hidden rounded-lg">
                 <Image
-                  src={siteConfig.logos.mainRed}
+                  src={siteConfig.logos.main}
                   alt="InfoTrie"
                   fill
                   className="object-contain"

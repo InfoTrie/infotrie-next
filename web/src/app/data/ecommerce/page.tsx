@@ -88,7 +88,7 @@ function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 40%, rgba(200, 16, 46, 0.1) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 30% 40%, rgba(0, 212, 170, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(78, 205, 196, 0.06) 0%, transparent 50%)",
         }}
       />
       {/* Grid pattern overlay */}
