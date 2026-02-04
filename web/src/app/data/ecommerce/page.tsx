@@ -20,15 +20,15 @@ import {
   Buildings,
   ChartBar,
   Target,
-  Link as LinkIcon,
+  LinkIcon,
   Users,
   ChatCircle,
   TrendUp,
   ClipboardText,
   ArrowLeft,
   GlobeHemisphereEast,
-} from "@phosphor-icons/react";
-import type { Icon } from "@phosphor-icons/react";
+} from "@/lib/icons";
+import type { Icon } from "@/lib/icons";
 
 // ============================================================
 // DATA DEFINITIONS
