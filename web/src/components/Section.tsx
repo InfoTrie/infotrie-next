@@ -4,7 +4,7 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
-  /** Use "default" for standard dark, "alt" for slightly lighter surface */
+  /** Use "default" for primary background, "alt" for secondary surface */
   variant?: "default" | "alt";
 }
 

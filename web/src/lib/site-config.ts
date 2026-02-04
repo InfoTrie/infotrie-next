@@ -4,9 +4,8 @@
 // Edit this file to update site content without touching components.
 // ============================================================
 
-// Cloudflare R2 media bucket base URL
-// Update this to your actual R2 public URL or custom domain
-export const MEDIA_BASE_URL = "https://media.infotrie.com";
+// Cloudflare R2 media bucket base URL (Public Development URL)
+export const MEDIA_BASE_URL = "https://pub-6276f4e2d49c4d849843c19472992520.r2.dev";
 
 export const siteConfig = {
   name: "InfoTrie",

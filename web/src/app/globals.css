@@ -2,38 +2,38 @@
 
 /* ============================================================
    CSS Custom Properties — Design Tokens
-   InfoTrie Brand Colors — Teal/Cyan Accent (matching infotrie.com)
+   InfoTrie Brand Colors — Light Theme with Teal Accent
    ============================================================ */
 
 :root {
-  /* Base colors — dark navy palette (from infotrie.com) */
-  --color-primary: #0a1628;
-  --color-secondary: #0d1b2a;
-  --color-tertiary: #12263a;
+  /* Base colors — light/white palette */
+  --color-primary: #ffffff;
+  --color-secondary: #f8fafb;
+  --color-tertiary: #f1f5f9;
 
   /* InfoTrie Teal brand accent */
-  --color-accent: #00d4aa;
-  --color-accent-hover: #00b894;
-  --color-accent-light: #4ecdc4;
-  --color-accent-soft: rgba(0, 212, 170, 0.1);
+  --color-accent: #00a88a;
+  --color-accent-hover: #008f75;
+  --color-accent-light: #00d4aa;
+  --color-accent-soft: rgba(0, 168, 138, 0.08);
 
   /* Secondary accent — coral for CTA buttons */
-  --color-coral: #ff6b6b;
-  --color-coral-hover: #ee5a5a;
-  --color-coral-soft: rgba(255, 107, 107, 0.15);
+  --color-coral: #e63946;
+  --color-coral-hover: #d32f3d;
+  --color-coral-soft: rgba(230, 57, 70, 0.08);
 
   /* Text colors */
-  --color-text: #e8ecf1;
-  --color-text-secondary: #c9d1d9;
-  --color-text-muted: #8899aa;
-  --color-text-dark: #0a1628;
+  --color-text: #1a202c;
+  --color-text-secondary: #4a5568;
+  --color-text-muted: #718096;
+  --color-text-light: #a0aec0;
 
   /* Surface colors */
-  --color-surface: #0f1d32;
-  --color-surface-elevated: #162440;
-  --color-surface-hover: #1e3350;
-  --color-border: #1e3350;
-  --color-border-light: #2d4a6a;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f8fafb;
+  --color-surface-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-light: #edf2f7;
 
   /* Typography */
   --font-display: "DM Serif Display", Georgia, serif;
@@ -70,7 +70,7 @@ code, pre, .font-mono {
   font-family: var(--font-mono);
 }
 
-/* Gradient text — teal to cyan effect (infotrie.com style) */
+/* Gradient text — teal effect */
 .text-gradient {
   background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
   -webkit-background-clip: text;
@@ -85,16 +85,16 @@ code, pre, .font-mono {
   background-clip: text;
 }
 
-/* Glassmorphism */
+/* Glassmorphism for header */
 .glass {
-  background: rgba(10, 22, 40, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--color-border);
 }
 
 .glass-card {
-  background: rgba(15, 29, 50, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-border);
@@ -102,11 +102,11 @@ code, pre, .font-mono {
 
 /* Glow effects */
 .glow-accent {
-  box-shadow: 0 0 40px rgba(0, 212, 170, 0.2);
+  box-shadow: 0 0 40px rgba(0, 168, 138, 0.15);
 }
 
 .glow-coral {
-  box-shadow: 0 0 40px rgba(255, 107, 107, 0.15);
+  box-shadow: 0 0 40px rgba(230, 57, 70, 0.1);
 }
 
 /* Hover lift effect */
@@ -116,7 +116,7 @@ code, pre, .font-mono {
 
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* Button styles */
@@ -130,12 +130,12 @@ code, pre, .font-mono {
 
 .btn-primary:hover {
   background: var(--color-coral-hover);
-  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
+  box-shadow: 0 8px 24px rgba(230, 57, 70, 0.25);
 }
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border);
   color: var(--color-text);
   font-weight: 600;
   border-radius: 8px;
@@ -145,6 +145,7 @@ code, pre, .font-mono {
 .btn-secondary:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 /* Card styles */
@@ -156,8 +157,8 @@ code, pre, .font-mono {
 }
 
 .card:hover {
-  border-color: var(--color-border-light);
-  background: var(--color-surface-elevated);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
 /* Animations */
@@ -206,9 +207,9 @@ code, pre, .font-mono {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-primary); }
+::-webkit-scrollbar-track { background: var(--color-secondary); }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-light);
+  background: var(--color-border);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -217,8 +218,8 @@ code, pre, .font-mono {
 
 /* Selection */
 ::selection {
-  background: rgba(0, 212, 170, 0.3);
-  color: white;
+  background: rgba(0, 168, 138, 0.2);
+  color: var(--color-text);
 }
 
 /* Focus styles for accessibility */
@@ -230,7 +231,7 @@ code, pre, .font-mono {
 /* Divider */
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-light), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
 }
 
 /* Decorative line accent */
@@ -241,14 +242,14 @@ code, pre, .font-mono {
   border-radius: 2px;
 }
 
-/* Background patterns */
+/* Background patterns - subtle for light theme */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 168, 138, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 168, 138, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 170, 0.08) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 168, 138, 0.06) 0%, transparent 60%);
 }
