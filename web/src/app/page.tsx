@@ -11,6 +11,7 @@ import {
   consultingServices,
   siteConfig,
 } from "@/lib/site-config";
+import { IconByKey, ArrowRight } from "@/lib/icons";
 
 // ============================================================
 // HERO
@@ -177,12 +178,17 @@ function Products() {
             className={`group card hover-lift rounded-2xl p-8 animate-fade-in-up animate-delay-${(index + 1) * 100}`}
           >
             <div
-              className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl text-3xl"
+              className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl"
               style={{
                 background: "var(--color-accent-soft)",
               }}
             >
-              {product.icon}
+              <IconByKey
+                name={product.icon}
+                size={28}
+                weight="duotone"
+                style={{ color: "var(--color-accent)" }}
+              />
             </div>
             <h3
               className="text-xl"
@@ -210,7 +216,7 @@ function Products() {
               style={{ color: "var(--color-accent)" }}
             >
               Learn more
-              <span>→</span>
+              <ArrowRight size={16} weight="bold" />
             </div>
           </Link>
         ))}
@@ -252,7 +258,17 @@ function DataGrid() {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}
           >
-            <div className="mb-4 text-3xl">{cat.icon}</div>
+            <div
+              className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
+              style={{ background: "var(--color-accent-soft)" }}
+            >
+              <IconByKey
+                name={cat.icon}
+                size={24}
+                weight="duotone"
+                style={{ color: "var(--color-accent)" }}
+              />
+            </div>
             <h4
               className="text-sm font-semibold"
               style={{ color: "var(--color-text)" }}
@@ -317,7 +333,7 @@ function Consulting() {
 
         {/* Right - Services Grid */}
         <div className="grid gap-4 sm:grid-cols-2">
-          {consultingServices.map((svc, index) => (
+          {consultingServices.map((svc) => (
             <div
               key={svc.title}
               className="rounded-xl p-6"
@@ -327,10 +343,15 @@ function Consulting() {
               }}
             >
               <div
-                className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-lg"
+                className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg"
                 style={{ background: "var(--color-accent-soft)" }}
               >
-                {["💼", "🔄", "🤖", "📋"][index]}
+                <IconByKey
+                  name={svc.icon}
+                  size={20}
+                  weight="duotone"
+                  style={{ color: "var(--color-accent)" }}
+                />
               </div>
               <h4
                 className="text-base font-semibold"

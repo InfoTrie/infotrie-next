@@ -4,6 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { LeadCaptureForm, FormField } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
+import {
+  Timer,
+  CurrencyDollar,
+  Target,
+  Rocket,
+} from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -61,22 +67,22 @@ const calculatorInputs = [
 
 const benefits = [
   {
-    icon: "⏱️",
+    icon: Timer,
     title: "Time Savings",
     description: "Reduce data collection time by 80%",
   },
   {
-    icon: "💰",
+    icon: CurrencyDollar,
     title: "Cost Reduction",
     description: "Lower infrastructure costs by 50%",
   },
   {
-    icon: "🎯",
+    icon: Target,
     title: "Data Quality",
     description: "99.9% accuracy with automated validation",
   },
   {
-    icon: "🚀",
+    icon: Rocket,
     title: "Time to Market",
     description: "Deploy in weeks, not months",
   },
@@ -337,7 +343,16 @@ export default function DataRoiCalculatorPage() {
                   border: "1px solid var(--color-border)",
                 }}
               >
-                <div className="mb-4 text-4xl">{benefit.icon}</div>
+                <div
+                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg"
+                  style={{ background: "var(--color-accent-soft)" }}
+                >
+                  <benefit.icon
+                    size={32}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                </div>
                 <h3
                   className="text-lg font-semibold"
                   style={{ color: "var(--color-text)" }}

@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import { LeadCaptureForm, FormField } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
-
-export const metadata: Metadata = {
-  title: "Free Financial Data Sample Pack | InfoTrie",
-  description:
-    "Download free sample datasets including EOD prices, fundamentals, and corporate actions. Perfect for fintech startups and developers.",
-};
+import {
+  TrendUp,
+  ChartBar,
+  Buildings,
+  Newspaper,
+  Lightning,
+  Terminal,
+  Check,
+} from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -53,25 +57,25 @@ const formFields: FormField[] = [
 
 const datasets = [
   {
-    icon: "📈",
+    icon: TrendUp,
     title: "End of Day Prices",
     description: "30 days of OHLCV data for 500+ US equities",
     format: "CSV, JSON",
   },
   {
-    icon: "📊",
+    icon: ChartBar,
     title: "Fundamental Data",
     description: "Latest quarterly financials for 100 companies",
     format: "CSV, JSON",
   },
   {
-    icon: "🏢",
+    icon: Buildings,
     title: "Corporate Actions",
     description: "Dividends, splits, and M&A for 30 days",
     format: "CSV, JSON",
   },
   {
-    icon: "📰",
+    icon: Newspaper,
     title: "News Feed Sample",
     description: "7 days of financial news with sentiment scores",
     format: "JSON",
@@ -79,10 +83,10 @@ const datasets = [
 ];
 
 const codeExamples = [
-  { lang: "Python", icon: "🐍" },
-  { lang: "R", icon: "📊" },
-  { lang: "JavaScript", icon: "⚡" },
-  { lang: "cURL", icon: "💻" },
+  { lang: "Python", icon: ChartBar },
+  { lang: "R", icon: ChartBar },
+  { lang: "JavaScript", icon: Lightning },
+  { lang: "cURL", icon: Terminal },
 ];
 
 const includedItems = [
@@ -152,7 +156,16 @@ export default function SampleDataPage() {
                       border: "1px solid var(--color-border)",
                     }}
                   >
-                    <div className="mb-2 text-2xl">{dataset.icon}</div>
+                    <div
+                      className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg"
+                      style={{ background: "var(--color-accent-soft)" }}
+                    >
+                      <dataset.icon
+                        size={24}
+                        weight="duotone"
+                        style={{ color: "var(--color-accent)" }}
+                      />
+                    </div>
                     <h3
                       className="text-sm font-semibold"
                       style={{ color: "var(--color-text)" }}
@@ -187,14 +200,19 @@ export default function SampleDataPage() {
                   {codeExamples.map((ex) => (
                     <span
                       key={ex.lang}
-                      className="rounded-lg px-3 py-1.5 text-xs font-medium"
+                      className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium"
                       style={{
                         background: "var(--color-surface)",
                         border: "1px solid var(--color-border)",
                         color: "var(--color-text)",
                       }}
                     >
-                      {ex.icon} {ex.lang}
+                      <ex.icon
+                        size={14}
+                        weight="duotone"
+                        style={{ color: "var(--color-accent)" }}
+                      />
+                      {ex.lang}
                     </span>
                   ))}
                 </div>
@@ -301,13 +319,16 @@ export default function SampleDataPage() {
                     style={{ color: "var(--color-text)" }}
                   >
                     <span
-                      className="flex h-6 w-6 items-center justify-center rounded-full text-xs"
+                      className="flex h-6 w-6 items-center justify-center rounded-full"
                       style={{
                         background: "var(--color-accent-soft)",
-                        color: "var(--color-accent)",
                       }}
                     >
-                      ✓
+                      <Check
+                        size={14}
+                        weight="duotone"
+                        style={{ color: "var(--color-accent)" }}
+                      />
                     </span>
                     {item}
                   </li>

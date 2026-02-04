@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { LeadCaptureForm, FormField } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
+import { Check } from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -387,13 +388,16 @@ export default function NlpWebinarPage() {
                       style={{ color: "var(--color-text)" }}
                     >
                       <span
-                        className="flex h-6 w-6 items-center justify-center rounded-full text-xs"
+                        className="flex h-6 w-6 items-center justify-center rounded-full"
                         style={{
                           background: "var(--color-accent-soft)",
-                          color: "var(--color-accent)",
                         }}
                       >
-                        ✓
+                        <Check
+                          size={14}
+                          weight="duotone"
+                          style={{ color: "var(--color-accent)" }}
+                        />
                       </span>
                       {item}
                     </li>

@@ -1,28 +1,50 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import { Section, SectionHeader } from "@/components/Section";
-
-export const metadata: Metadata = {
-  title: "E-Commerce Data Analytics",
-  description:
-    "Automate and interpret raw e-commerce datasets into useful, structured insights. Gather information from all major marketplaces and e-commerce platforms.",
-};
+import {
+  ShoppingCart,
+  Tag,
+  PaintBrush,
+  Factory,
+  Storefront,
+  Package,
+  Globe,
+  TShirt,
+  Plug,
+  Lightning,
+  Broadcast,
+  Lock,
+  Envelope,
+  Desktop,
+  Buildings,
+  ChartBar,
+  Target,
+  Link as LinkIcon,
+  Users,
+  ChatCircle,
+  TrendUp,
+  ClipboardText,
+  ArrowLeft,
+  GlobeHemisphereEast,
+} from "@phosphor-icons/react";
+import type { Icon } from "@phosphor-icons/react";
 
 // ============================================================
 // DATA DEFINITIONS
 // ============================================================
 
-const marketplaces = [
-  { name: "Amazon", icon: "🛒" },
-  { name: "eBay", icon: "🏷️" },
-  { name: "Etsy", icon: "🎨" },
-  { name: "Alibaba", icon: "🏭" },
-  { name: "Rakuten", icon: "🇯🇵" },
-  { name: "Walmart", icon: "🏪" },
-  { name: "AliExpress", icon: "📦" },
-  { name: "JD.com", icon: "🇨🇳" },
-  { name: "MercadoLibre", icon: "🌎" },
-  { name: "Poshmark", icon: "👗" },
+const marketplaces: { name: string; icon: Icon }[] = [
+  { name: "Amazon", icon: ShoppingCart },
+  { name: "eBay", icon: Tag },
+  { name: "Etsy", icon: PaintBrush },
+  { name: "Alibaba", icon: Factory },
+  { name: "Rakuten", icon: GlobeHemisphereEast },
+  { name: "Walmart", icon: Storefront },
+  { name: "AliExpress", icon: Package },
+  { name: "JD.com", icon: GlobeHemisphereEast },
+  { name: "MercadoLibre", icon: Globe },
+  { name: "Poshmark", icon: TShirt },
 ];
 
 const platforms = [
@@ -31,41 +53,41 @@ const platforms = [
   { name: "WooCommerce", description: "WordPress shop intelligence" },
 ];
 
-const deliveryMethods = [
-  { name: "REST API", icon: "🔌" },
-  { name: "Streaming API", icon: "⚡" },
-  { name: "Feed API", icon: "📡" },
-  { name: "SFTP", icon: "🔒" },
-  { name: "Email", icon: "📧" },
-  { name: "UI Export", icon: "💻" },
+const deliveryMethods: { name: string; icon: Icon }[] = [
+  { name: "REST API", icon: Plug },
+  { name: "Streaming API", icon: Lightning },
+  { name: "Feed API", icon: Broadcast },
+  { name: "SFTP", icon: Lock },
+  { name: "Email", icon: Envelope },
+  { name: "UI Export", icon: Desktop },
 ];
 
 const dataFormats = [".json", ".xml", ".csv", ".xls", ".sql", ".txt", ".bin"];
 
-const useCases = [
+const useCases: { title: string; description: string; icon: Icon }[] = [
   {
     title: "Retail Intelligence",
     description:
       "Monitor pricing trends, product availability, and competitive positioning across major marketplaces.",
-    icon: "🏬",
+    icon: Buildings,
   },
   {
     title: "Market Research",
     description:
       "Analyze consumer behavior, product reviews, and market trends to inform strategic decisions.",
-    icon: "📊",
+    icon: ChartBar,
   },
   {
     title: "Competitive Intelligence",
     description:
       "Track competitor products, pricing strategies, and market share across e-commerce platforms.",
-    icon: "🎯",
+    icon: Target,
   },
   {
     title: "B2B Data Enrichment",
     description:
       "Enhance your business data with seller information, ratings, and contact details.",
-    icon: "🔗",
+    icon: LinkIcon,
   },
 ];
 
@@ -74,6 +96,69 @@ const keyStats = [
   { value: "10+", label: "Marketplaces" },
   { value: "7+", label: "Years of Data" },
   { value: "Global", label: "Coverage" },
+];
+
+const dataCoverage: { title: string; items: string[]; icon: Icon }[] = [
+  {
+    title: "Product Data",
+    items: [
+      "Product listings & descriptions",
+      "Pricing & price history",
+      "Availability & stock levels",
+      "Product categories & attributes",
+    ],
+    icon: Package,
+  },
+  {
+    title: "Seller Intelligence",
+    items: [
+      "200K+ seller ratings",
+      "Seller contact information",
+      "Store performance metrics",
+      "Seller reputation scores",
+    ],
+    icon: Users,
+  },
+  {
+    title: "Consumer Insights",
+    items: [
+      "Product reviews & ratings",
+      "Customer sentiment analysis",
+      "Purchase trends",
+      "Q&A data",
+    ],
+    icon: ChatCircle,
+  },
+  {
+    title: "Market Trends",
+    items: [
+      "Category trends",
+      "Seasonal patterns",
+      "Trending products",
+      "Market share data",
+    ],
+    icon: TrendUp,
+  },
+  {
+    title: "Competitive Data",
+    items: [
+      "Competitor pricing",
+      "Product comparisons",
+      "Market positioning",
+      "Share of search",
+    ],
+    icon: Target,
+  },
+  {
+    title: "Industry Reports",
+    items: [
+      "E-commerce statistics",
+      "Industry benchmarks",
+      "Market forecasts",
+      "Consumer behavior trends",
+    ],
+    icon: ClipboardText,
+  },
 ];
 
 // ============================================================
@@ -100,7 +185,7 @@ function Hero() {
           className="mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:opacity-80"
           style={{ color: "var(--color-accent)" }}
         >
-          <span>←</span> Back to Data Solutions
+          <ArrowLeft size={16} weight="bold" /> Back to Data Solutions
         </Link>
 
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -194,33 +279,45 @@ function UseCases() {
         subtitle="Transform e-commerce data into actionable business intelligence."
       />
       <div className="grid gap-6 md:grid-cols-2">
-        {useCases.map((useCase) => (
-          <div
-            key={useCase.title}
-            className="rounded-2xl border p-8 transition-all"
-            style={{
-              background: "var(--color-surface)",
-              borderColor: "var(--color-border)",
-            }}
-          >
-            <div className="mb-4 text-4xl">{useCase.icon}</div>
-            <h3
-              className="text-xl"
+        {useCases.map((useCase) => {
+          const IconComponent = useCase.icon;
+          return (
+            <div
+              key={useCase.title}
+              className="rounded-2xl border p-8 transition-all"
               style={{
-                fontFamily: "var(--font-display)",
-                color: "var(--color-text)",
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border)",
               }}
             >
-              {useCase.title}
-            </h3>
-            <p
-              className="mt-3 text-sm leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {useCase.description}
-            </p>
-          </div>
-        ))}
+              <div
+                className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl"
+                style={{ background: "var(--color-accent-soft)" }}
+              >
+                <IconComponent
+                  size={28}
+                  weight="duotone"
+                  style={{ color: "var(--color-accent)" }}
+                />
+              </div>
+              <h3
+                className="text-xl"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  color: "var(--color-text)",
+                }}
+              >
+                {useCase.title}
+              </h3>
+              <p
+                className="mt-3 text-sm leading-relaxed"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {useCase.description}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );
@@ -238,24 +335,36 @@ function Marketplaces() {
         subtitle="Comprehensive coverage of the world's largest e-commerce platforms."
       />
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-        {marketplaces.map((marketplace) => (
-          <div
-            key={marketplace.name}
-            className="flex flex-col items-center rounded-xl border p-6 text-center transition-all hover:border-[var(--color-accent)]"
-            style={{
-              background: "var(--color-surface)",
-              borderColor: "var(--color-border)",
-            }}
-          >
-            <div className="mb-3 text-3xl">{marketplace.icon}</div>
-            <span
-              className="text-sm font-medium"
-              style={{ color: "var(--color-text)" }}
+        {marketplaces.map((marketplace) => {
+          const IconComponent = marketplace.icon;
+          return (
+            <div
+              key={marketplace.name}
+              className="flex flex-col items-center rounded-xl border p-6 text-center transition-all hover:border-[var(--color-accent)]"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border)",
+              }}
             >
-              {marketplace.name}
-            </span>
-          </div>
-        ))}
+              <div
+                className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg"
+                style={{ background: "var(--color-accent-soft)" }}
+              >
+                <IconComponent
+                  size={24}
+                  weight="duotone"
+                  style={{ color: "var(--color-accent)" }}
+                />
+              </div>
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--color-text)" }}
+              >
+                {marketplace.name}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );
@@ -331,24 +440,31 @@ function DataDelivery() {
             options.
           </p>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {deliveryMethods.map((method) => (
-              <div
-                key={method.name}
-                className="flex items-center gap-3 rounded-lg border p-4"
-                style={{
-                  background: "var(--color-surface)",
-                  borderColor: "var(--color-border)",
-                }}
-              >
-                <span className="text-xl">{method.icon}</span>
-                <span
-                  className="text-sm font-medium"
-                  style={{ color: "var(--color-text)" }}
+            {deliveryMethods.map((method) => {
+              const IconComponent = method.icon;
+              return (
+                <div
+                  key={method.name}
+                  className="flex items-center gap-3 rounded-lg border p-4"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border)",
+                  }}
                 >
-                  {method.name}
-                </span>
-              </div>
-            ))}
+                  <IconComponent
+                    size={20}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                  <span
+                    className="text-sm font-medium"
+                    style={{ color: "var(--color-text)" }}
+                  >
+                    {method.name}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -428,102 +544,53 @@ function DataCoverage() {
         subtitle="Comprehensive e-commerce data to power your analytics."
       />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {[
-          {
-            title: "Product Data",
-            items: [
-              "Product listings & descriptions",
-              "Pricing & price history",
-              "Availability & stock levels",
-              "Product categories & attributes",
-            ],
-            icon: "📦",
-          },
-          {
-            title: "Seller Intelligence",
-            items: [
-              "200K+ seller ratings",
-              "Seller contact information",
-              "Store performance metrics",
-              "Seller reputation scores",
-            ],
-            icon: "👥",
-          },
-          {
-            title: "Consumer Insights",
-            items: [
-              "Product reviews & ratings",
-              "Customer sentiment analysis",
-              "Purchase trends",
-              "Q&A data",
-            ],
-            icon: "💬",
-          },
-          {
-            title: "Market Trends",
-            items: [
-              "Category trends",
-              "Seasonal patterns",
-              "Trending products",
-              "Market share data",
-            ],
-            icon: "📈",
-          },
-          {
-            title: "Competitive Data",
-            items: [
-              "Competitor pricing",
-              "Product comparisons",
-              "Market positioning",
-              "Share of search",
-            ],
-            icon: "🎯",
-          },
-          {
-            title: "Industry Reports",
-            items: [
-              "E-commerce statistics",
-              "Industry benchmarks",
-              "Market forecasts",
-              "Consumer behavior trends",
-            ],
-            icon: "📋",
-          },
-        ].map((category) => (
-          <div
-            key={category.title}
-            className="rounded-xl border p-6"
-            style={{
-              background: "var(--color-surface)",
-              borderColor: "var(--color-border)",
-            }}
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <span className="text-2xl">{category.icon}</span>
-              <h4
-                className="text-lg"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  color: "var(--color-text)",
-                }}
-              >
-                {category.title}
-              </h4>
-            </div>
-            <ul className="space-y-2">
-              {category.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm"
-                  style={{ color: "var(--color-text-muted)" }}
+        {dataCoverage.map((category) => {
+          const IconComponent = category.icon;
+          return (
+            <div
+              key={category.title}
+              className="rounded-xl border p-6"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border)",
+              }}
+            >
+              <div className="mb-4 flex items-center gap-3">
+                <div
+                  className="flex h-10 w-10 items-center justify-center rounded-lg"
+                  style={{ background: "var(--color-accent-soft)" }}
                 >
-                  <span style={{ color: "var(--color-accent)" }}>•</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                  <IconComponent
+                    size={20}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                </div>
+                <h4
+                  className="text-lg"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  {category.title}
+                </h4>
+              </div>
+              <ul className="space-y-2">
+                {category.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    <span style={{ color: "var(--color-accent)" }}>•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );
