@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import { LeadCaptureForm, FormField } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
-
-export const metadata: Metadata = {
-  title: "Global E-Commerce Trends Report Q1 2025 | Free Download",
-  description:
-    "Download our quarterly e-commerce intelligence report with marketplace trends, category benchmarks, and sample datasets from Amazon, eBay, and more.",
-};
+import {
+  TrendUp,
+  Trophy,
+  CurrencyDollar,
+  Package,
+} from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -54,22 +55,22 @@ const formFields: FormField[] = [
 
 const reportHighlights = [
   {
-    icon: "📈",
+    icon: TrendUp,
     title: "Market Trends",
     description: "Q1 2025 marketplace growth rates and projections",
   },
   {
-    icon: "🏆",
+    icon: Trophy,
     title: "Category Rankings",
     description: "Top performing categories across major platforms",
   },
   {
-    icon: "💰",
+    icon: CurrencyDollar,
     title: "Pricing Intelligence",
     description: "Average selling prices and discount trends",
   },
   {
-    icon: "📦",
+    icon: Package,
     title: "Sample Dataset",
     description: "30-day product data from Amazon & eBay included",
   },
@@ -173,7 +174,16 @@ export default function EcommerceReportPage() {
                       border: "1px solid var(--color-border)",
                     }}
                   >
-                    <div className="mb-2 text-2xl">{item.icon}</div>
+                    <div
+                      className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg"
+                      style={{ background: "var(--color-accent-soft)" }}
+                    >
+                      <item.icon
+                        size={24}
+                        weight="duotone"
+                        style={{ color: "var(--color-accent)" }}
+                      />
+                    </div>
                     <h3
                       className="text-sm font-semibold"
                       style={{ color: "var(--color-text)" }}

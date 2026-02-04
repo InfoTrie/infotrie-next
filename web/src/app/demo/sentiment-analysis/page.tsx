@@ -3,6 +3,14 @@
 import Image from "next/image";
 import { LeadCaptureForm, FormField } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
+import {
+  Lightning,
+  Globe,
+  ChartBar,
+  Plug,
+  TrendUp,
+  Bell,
+} from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -60,22 +68,22 @@ const formFields: FormField[] = [
 
 const features = [
   {
-    icon: "⚡",
+    icon: Lightning,
     title: "Real-Time Scores",
     description: "Sub-second sentiment updates across 100,000+ assets",
   },
   {
-    icon: "🌍",
+    icon: Globe,
     title: "Global Coverage",
     description: "2,000+ news sources in 15+ languages",
   },
   {
-    icon: "📊",
+    icon: ChartBar,
     title: "Historical Data",
     description: "Backtest with data going back to 2012",
   },
   {
-    icon: "🔌",
+    icon: Plug,
     title: "Easy Integration",
     description: "REST API with Python, R, and Java SDKs",
   },
@@ -163,7 +171,16 @@ export default function SentimentAnalysisDemoPage() {
               <div className="mt-10 grid grid-cols-2 gap-4">
                 {features.map((feature) => (
                   <div key={feature.title} className="flex items-start gap-3">
-                    <span className="text-xl">{feature.icon}</span>
+                    <div
+                      className="flex h-8 w-8 items-center justify-center rounded-lg"
+                      style={{ background: "var(--color-accent-soft)" }}
+                    >
+                      <feature.icon
+                        size={20}
+                        weight="duotone"
+                        style={{ color: "var(--color-accent)" }}
+                      />
+                    </div>
                     <div>
                       <h3
                         className="text-sm font-semibold"
@@ -273,19 +290,19 @@ export default function SentimentAnalysisDemoPage() {
                 title: "Sentiment Dashboard",
                 description:
                   "Real-time sentiment scores, trends, and alerts for your watchlist.",
-                icon: "📊",
+                icon: ChartBar,
               },
               {
                 title: "Historical API Access",
                 description:
                   "Backtest your strategies with 10+ years of sentiment data.",
-                icon: "📈",
+                icon: TrendUp,
               },
               {
                 title: "Custom Alerts",
                 description:
                   "Get notified when sentiment shifts for key assets.",
-                icon: "🔔",
+                icon: Bell,
               },
             ].map((item) => (
               <div
@@ -296,7 +313,16 @@ export default function SentimentAnalysisDemoPage() {
                   border: "1px solid var(--color-border)",
                 }}
               >
-                <div className="mb-4 text-3xl">{item.icon}</div>
+                <div
+                  className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
+                  style={{ background: "var(--color-accent-soft)" }}
+                >
+                  <item.icon
+                    size={28}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                </div>
                 <h3
                   className="text-lg font-semibold"
                   style={{ color: "var(--color-text)" }}

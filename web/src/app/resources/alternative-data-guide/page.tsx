@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import {
   LeadCaptureForm,
   FormField,
 } from "@/components/LeadCaptureForm";
 import { siteConfig } from "@/lib/site-config";
-
-export const metadata: Metadata = {
-  title: "The 2025 Alternative Data Playbook | Free Guide",
-  description:
-    "Download our comprehensive guide on alternative data for institutional investors. Learn use cases, ROI frameworks, and vendor evaluation criteria.",
-};
+import {
+  ChartBar,
+  CurrencyDollar,
+  CheckCircle,
+  TrendUp,
+} from "@phosphor-icons/react";
+import type { Icon } from "@phosphor-icons/react";
 
 const formFields: FormField[] = [
   {
@@ -69,24 +71,24 @@ const formFields: FormField[] = [
   },
 ];
 
-const benefits = [
+const benefits: { icon: Icon; title: string; description: string }[] = [
   {
-    icon: "📊",
+    icon: ChartBar,
     title: "Data Type Overview",
     description: "Comprehensive breakdown of 15+ alternative data categories",
   },
   {
-    icon: "💰",
+    icon: CurrencyDollar,
     title: "ROI Framework",
     description: "Proven methodologies to measure alternative data alpha",
   },
   {
-    icon: "✅",
+    icon: CheckCircle,
     title: "Vendor Checklist",
     description: "20-point evaluation criteria for data providers",
   },
   {
-    icon: "📈",
+    icon: TrendUp,
     title: "Case Studies",
     description: "Real-world examples from leading hedge funds",
   },
@@ -153,30 +155,42 @@ export default function AlternativeDataGuidePage() {
 
               {/* Benefits Grid */}
               <div className="mt-10 grid grid-cols-2 gap-4">
-                {benefits.map((benefit) => (
-                  <div
-                    key={benefit.title}
-                    className="rounded-xl p-4"
-                    style={{
-                      background: "var(--color-surface)",
-                      border: "1px solid var(--color-border)",
-                    }}
-                  >
-                    <div className="mb-2 text-2xl">{benefit.icon}</div>
-                    <h3
-                      className="text-sm font-semibold"
-                      style={{ color: "var(--color-text)" }}
+                {benefits.map((benefit) => {
+                  const IconComponent = benefit.icon;
+                  return (
+                    <div
+                      key={benefit.title}
+                      className="rounded-xl p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
                     >
-                      {benefit.title}
-                    </h3>
-                    <p
-                      className="mt-1 text-xs"
-                      style={{ color: "var(--color-text-muted)" }}
-                    >
-                      {benefit.description}
-                    </p>
-                  </div>
-                ))}
+                      <div
+                        className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg"
+                        style={{ background: "var(--color-accent-soft)" }}
+                      >
+                        <IconComponent
+                          size={20}
+                          weight="duotone"
+                          style={{ color: "var(--color-accent)" }}
+                        />
+                      </div>
+                      <h3
+                        className="text-sm font-semibold"
+                        style={{ color: "var(--color-text)" }}
+                      >
+                        {benefit.title}
+                      </h3>
+                      <p
+                        className="mt-1 text-xs"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
+                        {benefit.description}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Trust Indicators */}

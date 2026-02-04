@@ -1,28 +1,33 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/lib/site-config";
-
-export const metadata: Metadata = {
-  title: "Thank You | InfoTrie",
-  description: "Thank you for your interest in InfoTrie.",
-};
+import {
+  Envelope,
+  Book,
+  ChatCircle,
+  ChartBar,
+  ShoppingCart,
+  BookOpen,
+  CheckCircle,
+} from "@phosphor-icons/react";
 
 const nextSteps = [
   {
-    icon: "📧",
+    icon: Envelope,
     title: "Check Your Email",
     description: "We've sent your download link and additional resources.",
   },
   {
-    icon: "📚",
+    icon: Book,
     title: "Explore Documentation",
     description: "Learn more about our APIs and data products.",
     link: "/docs",
     linkText: "View Docs",
   },
   {
-    icon: "💬",
+    icon: ChatCircle,
     title: "Talk to an Expert",
     description: "Have questions? Our team is ready to help.",
     link: "/contact",
@@ -35,19 +40,19 @@ const popularResources = [
     title: "FinSentS Platform",
     description: "Real-time sentiment analysis for 100K+ assets",
     link: "/products/finsents",
-    icon: "📊",
+    icon: ChartBar,
   },
   {
     title: "E-Commerce Analytics",
     description: "Marketplace intelligence from 10+ platforms",
     link: "/data/ecommerce",
-    icon: "🛒",
+    icon: ShoppingCart,
   },
   {
     title: "API Documentation",
     description: "Technical guides and integration examples",
     link: "/docs",
-    icon: "📖",
+    icon: BookOpen,
   },
 ];
 
@@ -68,12 +73,16 @@ export default function ThankYouPage() {
         <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-32">
           {/* Success Icon */}
           <div
-            className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full text-4xl"
+            className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full"
             style={{
               background: "var(--color-accent-soft)",
             }}
           >
-            ✓
+            <CheckCircle
+              size={48}
+              weight="duotone"
+              style={{ color: "var(--color-accent)" }}
+            />
           </div>
 
           <h1
@@ -135,7 +144,16 @@ export default function ThankYouPage() {
                   border: "1px solid var(--color-border)",
                 }}
               >
-                <div className="mb-4 text-4xl">{step.icon}</div>
+                <div
+                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg"
+                  style={{ background: "var(--color-accent-soft)" }}
+                >
+                  <step.icon
+                    size={32}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                </div>
                 <h3
                   className="text-lg font-semibold"
                   style={{ color: "var(--color-text)" }}
@@ -193,7 +211,16 @@ export default function ThankYouPage() {
                   border: "1px solid var(--color-border)",
                 }}
               >
-                <div className="mb-4 text-3xl">{resource.icon}</div>
+                <div
+                  className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
+                  style={{ background: "var(--color-accent-soft)" }}
+                >
+                  <resource.icon
+                    size={28}
+                    weight="duotone"
+                    style={{ color: "var(--color-accent)" }}
+                  />
+                </div>
                 <h3
                   className="text-lg font-semibold"
                   style={{ color: "var(--color-text)" }}

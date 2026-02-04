@@ -116,7 +116,7 @@ export const products = [
       "Low-latency push APIs",
       "Multi-language support",
     ],
-    icon: "📊",
+    icon: "chart-bar",
   },
   {
     slug: "docutrie",
@@ -132,7 +132,7 @@ export const products = [
       "High-accuracy recognition",
       "Enterprise-grade throughput",
     ],
-    icon: "📄",
+    icon: "file-text",
   },
   {
     slug: "ifeed-api",
@@ -148,7 +148,7 @@ export const products = [
       "Comprehensive documentation",
       "99.9% uptime SLA",
     ],
-    icon: "🔌",
+    icon: "plug",
   },
 ];
 
@@ -161,21 +161,25 @@ export const consultingServices = [
     title: "Financial IT Consulting",
     description:
       "15+ years of real-world experience in developing and operating complex treasury systems projects. Independent advisory, gap analysis, and project management.",
+    icon: "briefcase",
   },
   {
     title: "Custom Data Pipelines",
     description:
       "End-to-end data pipeline creation — from collection and processing to delivery. Tailored to your specific business requirements.",
+    icon: "arrows-clockwise",
   },
   {
     title: "AI & Predictive Analytics",
     description:
       "Smart agents and predictive analytics solutions powered by LLMs and advanced NLP. Transform your data into actionable intelligence.",
+    icon: "robot",
   },
   {
     title: "Project Management",
     description:
       "Qualified project managers and service delivery experts. Onshore and offshore delivery capabilities for complex outsourced solutions.",
+    icon: "clipboard-text",
   },
 ];
 
@@ -188,60 +192,60 @@ export const dataCategories = [
     slug: "alternative",
     name: "Alternative Data",
     short: "E-commerce, job postings, web data and more",
-    icon: "🌐",
+    icon: "globe",
   },
   {
     slug: "financial",
     name: "Financial Data",
     short: "EOD, fundamentals, corporate actions, profiles",
-    icon: "💹",
+    icon: "currency-dollar",
   },
   {
     slug: "fundamental",
     name: "Fundamental Data",
     short: "Financial statements, balance sheets, cash flows",
-    icon: "📈",
+    icon: "trend-up",
   },
   {
     slug: "eod",
     name: "End of Day Data",
     short: "Stock prices, options, ETFs, commodities",
-    icon: "🕐",
+    icon: "clock",
   },
   {
     slug: "sentiment",
     name: "Sentiment Analysis",
     short: "NLP-driven sentiment scores for 100K+ assets",
-    icon: "🧠",
+    icon: "brain",
   },
   {
     slug: "corporate-actions",
     name: "Corporate Actions",
     short: "Dividends, splits, M&A, IPOs across 156 countries",
-    icon: "🏢",
+    icon: "buildings",
   },
   {
     slug: "news-social",
     name: "News & Social Media",
     short: "Curated feeds from 2,000+ global sources",
-    icon: "📰",
+    icon: "newspaper",
   },
   {
     slug: "ecommerce",
     name: "E-Commerce Analytics",
     short: "Product reviews, ratings, marketplace intelligence",
-    icon: "🛒",
+    icon: "shopping-cart",
   },
   {
     slug: "job-postings",
     name: "Job Postings Data",
     short: "Real-time job market insights and trends",
-    icon: "💼",
+    icon: "briefcase",
   },
   {
     slug: "sec-filings",
     name: "SEC & Regulatory Filings",
     short: "Annual reports, ownership, 13F filings, and more",
-    icon: "📋",
+    icon: "clipboard-text",
   },
 ];
