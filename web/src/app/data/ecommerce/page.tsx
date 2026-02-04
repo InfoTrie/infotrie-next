@@ -88,18 +88,11 @@ function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 40%, rgba(0, 212, 170, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(78, 205, 196, 0.06) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 30% 40%, rgba(200, 16, 46, 0.1) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%)",
         }}
       />
       {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--color-accent) 1px, transparent 1px), linear-gradient(90deg, var(--color-accent) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+      <div className="absolute inset-0 bg-grid opacity-30" />
 
       <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
         <Link
@@ -112,7 +105,15 @@ function Hero() {
 
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <div className="mb-6 text-6xl">🛒</div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="accent-line" />
+              <span
+                className="text-sm font-semibold uppercase tracking-wider"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Data Solutions
+              </span>
+            </div>
             <h1
               className="text-4xl leading-tight md:text-5xl lg:text-6xl"
               style={{
@@ -120,7 +121,7 @@ function Hero() {
                 color: "var(--color-text)",
               }}
             >
-              E-Commerce Data Analytics
+              E-Commerce <span className="text-gradient">Data Analytics</span>
             </h1>
             <p
               className="mt-6 text-lg leading-relaxed md:text-xl"
@@ -134,21 +135,13 @@ function Hero() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="rounded-lg px-7 py-3.5 text-sm font-semibold transition-all"
-                style={{
-                  background: "var(--color-accent)",
-                  color: "var(--color-text-dark)",
-                }}
+                className="btn-primary rounded-lg px-7 py-3.5 text-sm"
               >
                 Request Sample Data
               </Link>
               <Link
                 href="/docs"
-                className="rounded-lg border px-7 py-3.5 text-sm font-semibold transition-all"
-                style={{
-                  borderColor: "var(--color-border)",
-                  color: "var(--color-text)",
-                }}
+                className="btn-secondary rounded-lg px-7 py-3.5 text-sm"
               >
                 View Documentation
               </Link>
@@ -398,7 +391,7 @@ function DataDelivery() {
             className="mt-8 rounded-xl border p-6"
             style={{
               borderColor: "var(--color-border)",
-              background: "rgba(0, 212, 170, 0.05)",
+              background: "var(--color-accent-soft)",
             }}
           >
             <h4
@@ -563,21 +556,13 @@ function CTA() {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/contact"
-            className="rounded-lg px-8 py-4 text-sm font-semibold transition-all"
-            style={{
-              background: "var(--color-accent)",
-              color: "var(--color-text-dark)",
-            }}
+            className="btn-primary rounded-lg px-8 py-4 text-sm"
           >
             Request a Demo
           </Link>
           <Link
             href="/data"
-            className="rounded-lg border px-8 py-4 text-sm font-semibold transition-all"
-            style={{
-              borderColor: "var(--color-border)",
-              color: "var(--color-text)",
-            }}
+            className="btn-secondary rounded-lg px-8 py-4 text-sm"
           >
             Explore Other Data
           </Link>

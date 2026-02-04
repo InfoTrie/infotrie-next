@@ -21,12 +21,12 @@ export function Section({
   const bg =
     variant === "alt"
       ? "var(--color-secondary)"
-      : "transparent";
+      : "var(--color-primary)";
 
   return (
     <section
       id={id}
-      className={`py-20 md:py-28 ${className}`}
+      className={`py-20 md:py-32 ${className}`}
       style={{ background: bg }}
     >
       <div className="mx-auto max-w-7xl px-6">{children}</div>

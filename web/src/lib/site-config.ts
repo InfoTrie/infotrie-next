@@ -4,12 +4,24 @@
 // Edit this file to update site content without touching components.
 // ============================================================
 
+// Cloudflare R2 media bucket base URL
+// Update this to your actual R2 public URL or custom domain
+export const MEDIA_BASE_URL = "https://media.infotrie.com";
+
 export const siteConfig = {
   name: "InfoTrie",
   tagline: "Alternative Data Specialist, AI & Financial IT Consulting",
   description:
     "InfoTrie, founded in 2012, is a leading AI and consulting company. We specialize in alternative data, sentiment analysis, financial engineering, and quantitative modelling.",
   url: "https://infotrie.com",
+  // Logo URLs from Cloudflare R2 (infotrie-media bucket)
+  logos: {
+    main: `${MEDIA_BASE_URL}/infotrie-logos/infotrie_logo.png`,
+    mainRed: `${MEDIA_BASE_URL}/infotrie-logos/infotrie_Red_transparent.png`,
+    symbol: `${MEDIA_BASE_URL}/infotrie-logos/infotrie_symbol.png`,
+    finsents: `${MEDIA_BASE_URL}/infotrie-logos/finsents_logo.png`,
+    finsentsSymbol: `${MEDIA_BASE_URL}/infotrie-logos/finsent_symbol.png`,
+  },
   contact: {
     email: "contact@infotrie.com",
     headquarters: "Singapore",
