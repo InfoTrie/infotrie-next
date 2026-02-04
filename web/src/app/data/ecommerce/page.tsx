@@ -1,0 +1,606 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Section, SectionHeader } from "@/components/Section";
+
+export const metadata: Metadata = {
+  title: "E-Commerce Data Analytics",
+  description:
+    "Automate and interpret raw e-commerce datasets into useful, structured insights. Gather information from all major marketplaces and e-commerce platforms.",
+};
+
+// ============================================================
+// DATA DEFINITIONS
+// ============================================================
+
+const marketplaces = [
+  { name: "Amazon", icon: "🛒" },
+  { name: "eBay", icon: "🏷️" },
+  { name: "Etsy", icon: "🎨" },
+  { name: "Alibaba", icon: "🏭" },
+  { name: "Rakuten", icon: "🇯🇵" },
+  { name: "Walmart", icon: "🏪" },
+  { name: "AliExpress", icon: "📦" },
+  { name: "JD.com", icon: "🇨🇳" },
+  { name: "MercadoLibre", icon: "🌎" },
+  { name: "Poshmark", icon: "👗" },
+];
+
+const platforms = [
+  { name: "Shopify", description: "Store analytics & product data" },
+  { name: "Magento", description: "Enterprise e-commerce insights" },
+  { name: "WooCommerce", description: "WordPress shop intelligence" },
+];
+
+const deliveryMethods = [
+  { name: "REST API", icon: "🔌" },
+  { name: "Streaming API", icon: "⚡" },
+  { name: "Feed API", icon: "📡" },
+  { name: "SFTP", icon: "🔒" },
+  { name: "Email", icon: "📧" },
+  { name: "UI Export", icon: "💻" },
+];
+
+const dataFormats = [".json", ".xml", ".csv", ".xls", ".sql", ".txt", ".bin"];
+
+const useCases = [
+  {
+    title: "Retail Intelligence",
+    description:
+      "Monitor pricing trends, product availability, and competitive positioning across major marketplaces.",
+    icon: "🏬",
+  },
+  {
+    title: "Market Research",
+    description:
+      "Analyze consumer behavior, product reviews, and market trends to inform strategic decisions.",
+    icon: "📊",
+  },
+  {
+    title: "Competitive Intelligence",
+    description:
+      "Track competitor products, pricing strategies, and market share across e-commerce platforms.",
+    icon: "🎯",
+  },
+  {
+    title: "B2B Data Enrichment",
+    description:
+      "Enhance your business data with seller information, ratings, and contact details.",
+    icon: "🔗",
+  },
+];
+
+const keyStats = [
+  { value: "200K+", label: "Seller Ratings" },
+  { value: "10+", label: "Marketplaces" },
+  { value: "7+", label: "Years of Data" },
+  { value: "Global", label: "Coverage" },
+];
+
+// ============================================================
+// HERO SECTION
+// ============================================================
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden pt-24">
+      {/* Background gradient mesh */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 30% 40%, rgba(0, 212, 170, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(78, 205, 196, 0.06) 0%, transparent 50%)",
+        }}
+      />
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--color-accent) 1px, transparent 1px), linear-gradient(90deg, var(--color-accent) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <Link
+          href="/data"
+          className="mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:opacity-80"
+          style={{ color: "var(--color-accent)" }}
+        >
+          <span>←</span> Back to Data Solutions
+        </Link>
+
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <div className="mb-6 text-6xl">🛒</div>
+            <h1
+              className="text-4xl leading-tight md:text-5xl lg:text-6xl"
+              style={{
+                fontFamily: "var(--font-display)",
+                color: "var(--color-text)",
+              }}
+            >
+              E-Commerce Data Analytics
+            </h1>
+            <p
+              className="mt-6 text-lg leading-relaxed md:text-xl"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              Automate and interpret raw e-commerce datasets into useful,
+              structured insights. We gather information from all major
+              marketplaces and e-commerce platforms into meaningful, accurate
+              data.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="rounded-lg px-7 py-3.5 text-sm font-semibold transition-all"
+                style={{
+                  background: "var(--color-accent)",
+                  color: "var(--color-text-dark)",
+                }}
+              >
+                Request Sample Data
+              </Link>
+              <Link
+                href="/docs"
+                className="rounded-lg border px-7 py-3.5 text-sm font-semibold transition-all"
+                style={{
+                  borderColor: "var(--color-border)",
+                  color: "var(--color-text)",
+                }}
+              >
+                View Documentation
+              </Link>
+            </div>
+          </div>
+
+          {/* Key Stats */}
+          <div
+            className="grid grid-cols-2 gap-6 rounded-2xl border p-8"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            {keyStats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div
+                  className="text-3xl font-bold md:text-4xl"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    color: "var(--color-accent)",
+                  }}
+                >
+                  {stat.value}
+                </div>
+                <div
+                  className="mt-1 text-sm"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// USE CASES SECTION
+// ============================================================
+
+function UseCases() {
+  return (
+    <Section variant="alt">
+      <SectionHeader
+        title="Use Cases"
+        subtitle="Transform e-commerce data into actionable business intelligence."
+      />
+      <div className="grid gap-6 md:grid-cols-2">
+        {useCases.map((useCase) => (
+          <div
+            key={useCase.title}
+            className="rounded-2xl border p-8 transition-all"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <div className="mb-4 text-4xl">{useCase.icon}</div>
+            <h3
+              className="text-xl"
+              style={{
+                fontFamily: "var(--font-display)",
+                color: "var(--color-text)",
+              }}
+            >
+              {useCase.title}
+            </h3>
+            <p
+              className="mt-3 text-sm leading-relaxed"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {useCase.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// MARKETPLACES SECTION
+// ============================================================
+
+function Marketplaces() {
+  return (
+    <Section>
+      <SectionHeader
+        title="Supported Marketplaces"
+        subtitle="Comprehensive coverage of the world's largest e-commerce platforms."
+      />
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        {marketplaces.map((marketplace) => (
+          <div
+            key={marketplace.name}
+            className="flex flex-col items-center rounded-xl border p-6 text-center transition-all hover:border-[var(--color-accent)]"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <div className="mb-3 text-3xl">{marketplace.icon}</div>
+            <span
+              className="text-sm font-medium"
+              style={{ color: "var(--color-text)" }}
+            >
+              {marketplace.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// PLATFORMS SECTION
+// ============================================================
+
+function Platforms() {
+  return (
+    <Section variant="alt">
+      <SectionHeader
+        title="E-Commerce Platforms"
+        subtitle="Native support for leading e-commerce platforms."
+      />
+      <div className="grid gap-6 md:grid-cols-3">
+        {platforms.map((platform) => (
+          <div
+            key={platform.name}
+            className="rounded-xl border p-8 text-center"
+            style={{
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <h4
+              className="text-xl"
+              style={{
+                fontFamily: "var(--font-display)",
+                color: "var(--color-text)",
+              }}
+            >
+              {platform.name}
+            </h4>
+            <p
+              className="mt-2 text-sm"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {platform.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// DATA DELIVERY SECTION
+// ============================================================
+
+function DataDelivery() {
+  return (
+    <Section>
+      <div className="grid gap-12 lg:grid-cols-2">
+        {/* Delivery Methods */}
+        <div>
+          <h3
+            className="mb-6 text-2xl md:text-3xl"
+            style={{
+              fontFamily: "var(--font-display)",
+              color: "var(--color-text)",
+            }}
+          >
+            Flexible Delivery Methods
+          </h3>
+          <p
+            className="mb-8 text-sm leading-relaxed"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Access your data the way that works best for your infrastructure.
+            From real-time APIs to batch exports, we support multiple delivery
+            options.
+          </p>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {deliveryMethods.map((method) => (
+              <div
+                key={method.name}
+                className="flex items-center gap-3 rounded-lg border p-4"
+                style={{
+                  background: "var(--color-surface)",
+                  borderColor: "var(--color-border)",
+                }}
+              >
+                <span className="text-xl">{method.icon}</span>
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  {method.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Data Formats */}
+        <div>
+          <h3
+            className="mb-6 text-2xl md:text-3xl"
+            style={{
+              fontFamily: "var(--font-display)",
+              color: "var(--color-text)",
+            }}
+          >
+            Multiple Data Formats
+          </h3>
+          <p
+            className="mb-8 text-sm leading-relaxed"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            Receive data in the format that integrates seamlessly with your
+            existing workflows and analytics tools.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {dataFormats.map((format) => (
+              <span
+                key={format}
+                className="rounded-lg border px-4 py-2 font-mono text-sm"
+                style={{
+                  background: "var(--color-surface)",
+                  borderColor: "var(--color-border)",
+                  color: "var(--color-accent)",
+                }}
+              >
+                {format}
+              </span>
+            ))}
+          </div>
+
+          {/* Compliance */}
+          <div
+            className="mt-8 rounded-xl border p-6"
+            style={{
+              borderColor: "var(--color-border)",
+              background: "rgba(0, 212, 170, 0.05)",
+            }}
+          >
+            <h4
+              className="mb-2 text-sm font-semibold"
+              style={{ color: "var(--color-text)" }}
+            >
+              Data Privacy Compliance
+            </h4>
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              We follow data privacy laws and regulations including{" "}
+              <strong style={{ color: "var(--color-accent)" }}>GDPR</strong> and{" "}
+              <strong style={{ color: "var(--color-accent)" }}>CCPA</strong> to
+              ensure your data operations remain compliant.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// DATA COVERAGE SECTION
+// ============================================================
+
+function DataCoverage() {
+  return (
+    <Section variant="alt">
+      <SectionHeader
+        title="What Data We Collect"
+        subtitle="Comprehensive e-commerce data to power your analytics."
+      />
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {[
+          {
+            title: "Product Data",
+            items: [
+              "Product listings & descriptions",
+              "Pricing & price history",
+              "Availability & stock levels",
+              "Product categories & attributes",
+            ],
+            icon: "📦",
+          },
+          {
+            title: "Seller Intelligence",
+            items: [
+              "200K+ seller ratings",
+              "Seller contact information",
+              "Store performance metrics",
+              "Seller reputation scores",
+            ],
+            icon: "👥",
+          },
+          {
+            title: "Consumer Insights",
+            items: [
+              "Product reviews & ratings",
+              "Customer sentiment analysis",
+              "Purchase trends",
+              "Q&A data",
+            ],
+            icon: "💬",
+          },
+          {
+            title: "Market Trends",
+            items: [
+              "Category trends",
+              "Seasonal patterns",
+              "Trending products",
+              "Market share data",
+            ],
+            icon: "📈",
+          },
+          {
+            title: "Competitive Data",
+            items: [
+              "Competitor pricing",
+              "Product comparisons",
+              "Market positioning",
+              "Share of search",
+            ],
+            icon: "🎯",
+          },
+          {
+            title: "Industry Reports",
+            items: [
+              "E-commerce statistics",
+              "Industry benchmarks",
+              "Market forecasts",
+              "Consumer behavior trends",
+            ],
+            icon: "📋",
+          },
+        ].map((category) => (
+          <div
+            key={category.title}
+            className="rounded-xl border p-6"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border)",
+            }}
+          >
+            <div className="mb-4 flex items-center gap-3">
+              <span className="text-2xl">{category.icon}</span>
+              <h4
+                className="text-lg"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  color: "var(--color-text)",
+                }}
+              >
+                {category.title}
+              </h4>
+            </div>
+            <ul className="space-y-2">
+              {category.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 text-sm"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  <span style={{ color: "var(--color-accent)" }}>•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// CTA SECTION
+// ============================================================
+
+function CTA() {
+  return (
+    <Section>
+      <div className="mx-auto max-w-2xl text-center">
+        <h2
+          className="text-3xl md:text-4xl"
+          style={{
+            fontFamily: "var(--font-display)",
+            color: "var(--color-text)",
+          }}
+        >
+          Ready to unlock e-commerce insights?
+        </h2>
+        <p
+          className="mt-4 text-lg"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          Get in touch to discuss how our e-commerce data can power your
+          business decisions.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <Link
+            href="/contact"
+            className="rounded-lg px-8 py-4 text-sm font-semibold transition-all"
+            style={{
+              background: "var(--color-accent)",
+              color: "var(--color-text-dark)",
+            }}
+          >
+            Request a Demo
+          </Link>
+          <Link
+            href="/data"
+            className="rounded-lg border px-8 py-4 text-sm font-semibold transition-all"
+            style={{
+              borderColor: "var(--color-border)",
+              color: "var(--color-text)",
+            }}
+          >
+            Explore Other Data
+          </Link>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// ============================================================
+// PAGE COMPONENT
+// ============================================================
+
+export default function ECommerceAnalyticsPage() {
+  return (
+    <>
+      <Hero />
+      <UseCases />
+      <Marketplaces />
+      <Platforms />
+      <DataDelivery />
+      <DataCoverage />
+      <CTA />
+    </>
+  );
+}
