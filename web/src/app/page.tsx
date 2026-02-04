@@ -24,7 +24,7 @@ function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 20%, rgba(200, 16, 46, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(212, 168, 83, 0.08) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 20% 50%, rgba(0, 212, 170, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(78, 205, 196, 0.06) 0%, transparent 50%)",
         }}
       />
       {/* Grid pattern overlay */}
@@ -33,11 +33,11 @@ function Hero() {
       {/* Decorative elements */}
       <div
         className="absolute top-1/4 right-10 h-64 w-64 rounded-full blur-3xl"
-        style={{ background: "rgba(200, 16, 46, 0.1)" }}
+        style={{ background: "rgba(0, 212, 170, 0.08)" }}
       />
       <div
         className="absolute bottom-1/4 left-10 h-48 w-48 rounded-full blur-3xl"
-        style={{ background: "rgba(212, 168, 83, 0.08)" }}
+        style={{ background: "rgba(78, 205, 196, 0.06)" }}
       />
 
       <div className="relative mx-auto max-w-7xl px-6 py-32">
@@ -97,7 +97,7 @@ function Hero() {
               <div className="mb-8 flex items-center gap-4">
                 <div className="relative h-14 w-14 overflow-hidden rounded-xl">
                   <Image
-                    src={siteConfig.logos.mainRed}
+                    src={siteConfig.logos.main}
                     alt="InfoTrie"
                     fill
                     className="object-contain"
@@ -328,7 +328,7 @@ function Consulting() {
             >
               <div
                 className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg text-lg"
-                style={{ background: "var(--color-gold-soft)" }}
+                style={{ background: "var(--color-accent-soft)" }}
               >
                 {["💼", "🔄", "🤖", "📋"][index]}
               </div>
@@ -370,11 +370,11 @@ function CTA() {
         {/* Background decoration */}
         <div
           className="absolute -top-20 -right-20 h-64 w-64 rounded-full blur-3xl"
-          style={{ background: "rgba(200, 16, 46, 0.15)" }}
+          style={{ background: "rgba(0, 212, 170, 0.12)" }}
         />
         <div
           className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full blur-3xl"
-          style={{ background: "rgba(212, 168, 83, 0.1)" }}
+          style={{ background: "rgba(78, 205, 196, 0.08)" }}
         />
 
         <div className="relative mx-auto max-w-2xl text-center">

@@ -60,7 +60,7 @@ export default function ThankYouPage() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 30%, rgba(200, 16, 46, 0.12) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 50% 30%, rgba(0, 212, 170, 0.12) 0%, transparent 50%)",
           }}
         />
         <div className="absolute inset-0 bg-grid opacity-30" />
@@ -98,7 +98,7 @@ export default function ThankYouPage() {
           <div className="mt-8 flex justify-center">
             <div className="relative h-12 w-12">
               <Image
-                src={siteConfig.logos.mainRed}
+                src={siteConfig.logos.main}
                 alt="InfoTrie"
                 fill
                 className="object-contain"

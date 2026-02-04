@@ -111,7 +111,7 @@ export default function NlpWebinarPage() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 20%, rgba(200, 16, 46, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(212, 168, 83, 0.08) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 30% 20%, rgba(0, 212, 170, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(78, 205, 196, 0.08) 0%, transparent 50%)",
           }}
         />
         <div className="absolute inset-0 bg-grid opacity-30" />
@@ -253,7 +253,7 @@ export default function NlpWebinarPage() {
               >
                 <div className="relative h-10 w-10">
                   <Image
-                    src={siteConfig.logos.mainRed}
+                    src={siteConfig.logos.main}
                     alt="InfoTrie"
                     fill
                     className="object-contain"

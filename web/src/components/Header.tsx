@@ -33,7 +33,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3">
           <div className="relative h-10 w-10 overflow-hidden rounded-lg">
             <Image
-              src={siteConfig.logos.mainRed}
+              src={siteConfig.logos.main}
               alt="InfoTrie"
               fill
               className="object-contain"
@@ -140,7 +140,7 @@ export function Header() {
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "var(--color-accent-hover)";
               e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(200, 16, 46, 0.3)";
+                "0 8px 24px rgba(0, 212, 170, 0.3)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "var(--color-accent)";
