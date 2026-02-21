@@ -3,15 +3,16 @@
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import type { TeamProfile } from "@/lib/site-config";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, companyInfo } from "@/lib/site-config";
 
 function generateVCardString(profile: TeamProfile): string {
+  const addr = companyInfo.address;
   const lines: string[] = [
     "BEGIN:VCARD",
     "VERSION:3.0",
     `N:${profile.lastName};${profile.firstName};;;`,
     `FN:${profile.firstName} ${profile.lastName}`,
-    `ORG:${siteConfig.name}`,
+    `ORG:${companyInfo.legalName}`,
     `TITLE:${profile.title}`,
     `EMAIL;TYPE=WORK:${profile.email}`,
   ];
@@ -25,10 +26,7 @@ function generateVCardString(profile: TeamProfile): string {
   }
 
   lines.push(`URL;TYPE=WORK:${siteConfig.url}`);
-
-  if (profile.location) {
-    lines.push(`ADR;TYPE=WORK:;;${profile.location};;;;`);
-  }
+  lines.push(`ADR;TYPE=WORK:;;${addr.street}\\n${addr.building};${addr.city};;${addr.postalCode};${addr.country}`);
 
   if (profile.photo) {
     lines.push(`PHOTO;VALUE=URI:${profile.photo}`);

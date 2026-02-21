@@ -254,6 +254,17 @@ export const dataCategories = [
 // Accessible at /t/[slug] — designed for QR codes on business cards
 // ============================================================
 
+export const companyInfo = {
+  legalName: "InfoTrie Financial Solutions Pte Ltd",
+  address: {
+    street: "50 Raffles Place, 37th Floor",
+    building: "Singapore Land Tower",
+    city: "Singapore",
+    postalCode: "048623",
+    country: "Singapore",
+  },
+};
+
 export type TeamProfile = {
   slug: string;
   firstName: string;
@@ -274,10 +285,32 @@ export const teamProfiles: TeamProfile[] = [
     lastName: "Georjon",
     title: "Founder & CEO",
     email: "frederic.georjon@infotrie.com",
-    phone: "+65 9XXX XXXX",
+    phone: "+33 6 13 04 06 00",
     linkedin: "https://www.linkedin.com/in/fredericgeorjon",
     photo: `${MEDIA_BASE_URL}/team/frederic-georjon.jpg`,
     location: "Singapore",
     bio: "Founder of InfoTrie, with 15+ years of experience in financial technology, alternative data, and AI-driven analytics.",
+  },
+  {
+    slug: "zhicheng-long",
+    firstName: "Zhicheng",
+    lastName: "Long",
+    title: "CTO",
+    email: "zhicheng.long@infotrie.com",
+    phone: "+39 328 422 9470",
+    linkedin: "https://www.linkedin.com/in/zhichenglong/",
+    photo: `${MEDIA_BASE_URL}/team/zhicheng-long.jpg`,
+    location: "Hong Kong / Singapore",
+  },
+  {
+    slug: "manika-sharma",
+    firstName: "Manika",
+    lastName: "Sharma",
+    title: "Head of Business Development",
+    email: "manika.sharma@infotrie.com",
+    phone: "+33 7 45 51 23 73",
+    linkedin: "https://www.linkedin.com/in/manika-sharma-034564126/",
+    photo: `${MEDIA_BASE_URL}/team/manika-sharma.jpg`,
+    location: "Paris / New Delhi",
   },
 ];
