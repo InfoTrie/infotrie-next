@@ -248,3 +248,36 @@ export const dataCategories = [
     icon: "clipboard-text",
   },
 ];
+
+// ============================================================
+// Team Profiles (vCard / Business Card pages)
+// Accessible at /t/[slug] — designed for QR codes on business cards
+// ============================================================
+
+export type TeamProfile = {
+  slug: string;
+  firstName: string;
+  lastName: string;
+  title: string;
+  email: string;
+  phone?: string;
+  linkedin?: string;
+  photo?: string;
+  location?: string;
+  bio?: string;
+};
+
+export const teamProfiles: TeamProfile[] = [
+  {
+    slug: "frederic-georjon",
+    firstName: "Frederic",
+    lastName: "Georjon",
+    title: "Founder & CEO",
+    email: "frederic.georjon@infotrie.com",
+    phone: "+65 9XXX XXXX",
+    linkedin: "https://www.linkedin.com/in/fredericgeorjon",
+    photo: `${MEDIA_BASE_URL}/team/frederic-georjon.jpg`,
+    location: "Singapore",
+    bio: "Founder of InfoTrie, with 15+ years of experience in financial technology, alternative data, and AI-driven analytics.",
+  },
+];
