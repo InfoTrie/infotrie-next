@@ -20,6 +20,7 @@ npm run start  # → http://localhost:3002
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
+- **Auth**: NextAuth.js v5 + Keycloak (OIDC)
 - **Styling**: Tailwind CSS 4 + CSS custom properties
 - **Fonts**: DM Serif Display (headings) + DM Sans (body) + JetBrains Mono (code)
 - **Deployment**: PM2 on Hetzner server (65.109.55.242:3002)
@@ -29,26 +30,35 @@ npm run start  # → http://localhost:3002
 ```
 src/
 ├── app/                      # Next.js App Router pages
-│   ├── layout.tsx            # Root layout (Header + Footer)
+│   ├── layout.tsx            # Root layout (SessionProvider + Header + Footer)
 │   ├── page.tsx              # Homepage
 │   ├── globals.css           # Global styles + design tokens
+│   ├── api/auth/[...nextauth]/route.ts  # NextAuth API route handler
+│   ├── auth/signin/page.tsx  # Custom sign-in page
 │   ├── products/
 │   │   ├── page.tsx          # Products listing
 │   │   └── [slug]/page.tsx   # Product detail (FinSentS, DocuTrie, iFeed)
-│   ├── data/
+│   ├── data/                 # 🔒 Protected — requires auth
 │   │   ├── page.tsx          # Data solutions listing
 │   │   └── [slug]/page.tsx   # Data category detail (10 categories)
+│   ├── docs/page.tsx         # 🔒 Protected — Documentation hub
+│   ├── demo/                 # 🔒 Protected — Demo pages
 │   ├── consulting/page.tsx   # Consulting page
 │   ├── data-specialist/page.tsx  # "Fisherman" concept page
-│   ├── contact/page.tsx      # Contact form
-│   └── docs/page.tsx         # Documentation hub
+│   └── contact/page.tsx      # Contact form
 ├── components/
-│   ├── Header.tsx            # Responsive nav with dropdowns
+│   ├── Header.tsx            # Responsive nav with dropdowns + auth button
+│   ├── AuthButton.tsx        # Login/Logout button (uses next-auth/react)
+│   ├── SessionProvider.tsx   # NextAuth SessionProvider wrapper
 │   ├── Footer.tsx            # Site footer
 │   └── Section.tsx           # Reusable section + section header
-└── lib/
-    ├── site-config.ts        # ⭐ ALL SITE CONTENT — edit here first
-    └── theme.ts              # Design tokens (colors, fonts)
+├── lib/
+│   ├── auth.ts               # ⭐ NextAuth v5 config (Keycloak provider)
+│   ├── site-config.ts        # ⭐ ALL SITE CONTENT — edit here first
+│   └── theme.ts              # Design tokens (colors, fonts)
+├── types/
+│   └── next-auth.d.ts        # Extended session/JWT type declarations
+└── middleware.ts              # Route protection (/docs, /data, /demo)
 ```
 
 ## How to Edit Content
@@ -133,6 +143,93 @@ pm2 save
 pm2 startup
 ```
 
+## Authentication (Keycloak)
+
+The site uses **NextAuth.js v5** with **Keycloak** as the OIDC identity provider.
+
+- **Keycloak instance**: `https://auth.infotrie.com` (RKE2 cluster, namespace `infra-keycloak`)
+- **Protected routes**: `/docs/*`, `/data/*`, `/demo/*` (configured in `src/middleware.ts`)
+- **Public routes**: `/`, `/products/*`, `/consulting`, `/contact`, `/data-specialist`
+
+### Keycloak Setup (one-time)
+
+#### 1. Create the realm
+
+1. Go to `https://auth.infotrie.com/admin`
+2. Click **Create Realm**
+3. Set **Realm name**: `infotrie`
+4. Save
+
+#### 2. Create the client
+
+In the `infotrie` realm:
+
+1. Go to **Clients** → **Create client**
+2. Set **Client ID**: `infotrie-web`
+3. Set **Client Protocol**: `openid-connect`
+4. Enable **Client authentication** (confidential)
+5. Set **Valid Redirect URIs**: `https://infotrie.com/api/auth/callback/keycloak`
+6. Set **Valid Post Logout Redirect URIs**: `https://infotrie.com`
+7. Set **Web Origins**: `https://infotrie.com`
+8. Save
+
+> For local dev, add `http://localhost:3002/api/auth/callback/keycloak` to Valid Redirect URIs.
+
+#### 3. Get the client secret
+
+1. In the `infotrie-web` client, go to the **Credentials** tab
+2. Copy the **Client Secret**
+
+#### 4. Create users
+
+1. Go to **Users** → **Add user**
+2. Fill in username/email
+3. Go to the **Credentials** tab to set a password
+
+### Environment Variables
+
+Copy `env.local.example` to `.env.local` and fill in the values:
+
+```bash
+cp env.local.example .env.local
+```
+
+```env
+# Generate a secret: openssl rand -base64 32
+AUTH_SECRET="generated-secret-here"
+
+# From Keycloak admin → Clients → infotrie-web → Credentials
+KEYCLOAK_CLIENT_ID="infotrie-web"
+KEYCLOAK_CLIENT_SECRET="your-client-secret"
+KEYCLOAK_ISSUER="https://auth.infotrie.com/realms/infotrie"
+
+# Public URL of the site
+AUTH_URL="https://infotrie.com"
+AUTH_TRUST_HOST=true
+```
+
+### Changing Protected Routes
+
+Edit `src/middleware.ts` to change which pages require authentication:
+
+```ts
+export const config = {
+  matcher: ["/docs/:path*", "/data/:path*", "/demo/:path*"],
+};
+```
+
+Also update the `protectedPaths` array in `src/lib/auth.ts` to keep them in sync.
+
+### Auth Flow
+
+1. User visits a protected page → middleware redirects to `/auth/signin`
+2. User clicks "Se connecter avec Keycloak" → redirected to Keycloak login
+3. After login, Keycloak redirects back to `/api/auth/callback/keycloak`
+4. NextAuth creates a session, user is redirected to the original page
+5. Header shows username + "Déconnexion" button
+
+---
+
 ## TODO — Content Migration
 
 Priority pages to migrate from WordPress:
@@ -151,7 +248,7 @@ Priority pages to migrate from WordPress:
 - [ ] SEO: meta tags, OG images, sitemap.xml
 - [ ] Analytics integration
 - [ ] Images and media assets from WordPress
-- [ ] Shop/Login functionality (if needed)
+- [x] Login functionality (Keycloak via NextAuth.js v5)
 
 ## Git Conventions
 
