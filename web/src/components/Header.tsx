@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { navigation, siteConfig } from "@/lib/site-config";
+import { AuthButton } from "@/components/AuthButton";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -129,10 +130,15 @@ export function Header() {
             </div>
           ))}
 
+          {/* Auth Button */}
+          <div className="ml-4">
+            <AuthButton />
+          </div>
+
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="ml-6 rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-300"
+            className="ml-2 rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-300"
             style={{
               background: "var(--color-accent)",
               color: "white",
@@ -221,6 +227,9 @@ export function Header() {
               </div>
             ))}
             <div className="mt-6 pt-6" style={{ borderTop: "1px solid var(--color-border)" }}>
+              <div className="mb-4">
+                <AuthButton />
+              </div>
               <Link
                 href="/contact"
                 className="block rounded-lg py-3.5 text-center text-sm font-semibold transition-all"
