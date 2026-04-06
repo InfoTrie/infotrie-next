@@ -74,6 +74,7 @@ export const navigation: NavItem[] = [
   { label: "Data Specialist", href: "/data-specialist" },
   { label: "Consulting", href: "/consulting" },
   { label: "Documentation", href: "/docs" },
+  { label: "Dashboard", href: "/dashboard" },
   { label: "Contact", href: "/contact" },
 ];
 

@@ -81,6 +81,7 @@ import {
   Sparkle,
   Handshake,
   Certificate,
+  Key,
 } from "@phosphor-icons/react";
 import type { Icon } from "@phosphor-icons/react";
 
@@ -178,6 +179,9 @@ export const iconMap: Record<string, Icon> = {
   linkedin: LinkedinLogo,
   github: GithubLogo,
   twitter: TwitterLogo,
+
+  // Auth
+  key: Key,
 
   // Special
   sparkle: Sparkle,
@@ -298,6 +302,7 @@ export {
   Sparkle,
   Handshake,
   Certificate,
+  Key,
 };
 
 export type { Icon };
