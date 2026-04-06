@@ -35,6 +35,16 @@
   --color-border: #e2e8f0;
   --color-border-light: #edf2f7;
 
+  /* Status colors */
+  --color-success: #16a34a;
+  --color-success-soft: rgba(22, 163, 74, 0.1);
+  --color-error: #dc2626;
+  --color-error-soft: rgba(220, 38, 38, 0.1);
+  --color-warning: #d97706;
+  --color-warning-soft: rgba(217, 119, 6, 0.1);
+  --color-info: #2563eb;
+  --color-info-soft: rgba(37, 99, 235, 0.1);
+
   /* Typography */
   --font-display: "DM Serif Display", Georgia, serif;
   --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;

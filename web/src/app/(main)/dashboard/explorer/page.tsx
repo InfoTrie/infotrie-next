@@ -355,10 +355,10 @@ const endpoints: Endpoint[] = [
 const categories = [...new Set(endpoints.map((e) => e.category))];
 
 const methodColors: Record<string, { bg: string; color: string }> = {
-  GET: { bg: "rgba(22, 163, 74, 0.1)", color: "#16a34a" },
-  POST: { bg: "rgba(37, 99, 235, 0.1)", color: "#2563eb" },
-  PUT: { bg: "rgba(217, 119, 6, 0.1)", color: "#d97706" },
-  DELETE: { bg: "rgba(220, 38, 38, 0.1)", color: "#dc2626" },
+  GET: { bg: "var(--color-success-soft)", color: "var(--color-success)" },
+  POST: { bg: "var(--color-info-soft)", color: "var(--color-info)" },
+  PUT: { bg: "var(--color-warning-soft)", color: "var(--color-warning)" },
+  DELETE: { bg: "var(--color-error-soft)", color: "var(--color-error)" },
 };
 
 // ============================================================
@@ -587,7 +587,7 @@ export default function ApiExplorerPage() {
                     {param.required && (
                       <span
                         className="text-[10px] font-bold"
-                        style={{ color: "#dc2626" }}
+                        style={{ color: "var(--color-error)" }}
                       >
                         required
                       </span>
@@ -684,7 +684,7 @@ export default function ApiExplorerPage() {
                 className="flex items-center gap-1 text-xs font-medium transition-colors"
                 style={{
                   color: copied
-                    ? "#16a34a"
+                    ? "var(--color-success)"
                     : "var(--color-text-muted)",
                 }}
               >
@@ -730,8 +730,8 @@ export default function ApiExplorerPage() {
                       <span
                         className="rounded-full px-2 py-0.5 text-[10px] font-bold"
                         style={{
-                          background: "rgba(22, 163, 74, 0.1)",
-                          color: "#16a34a",
+                          background: "var(--color-success-soft)",
+                          color: "var(--color-success)",
                         }}
                       >
                         200 OK
@@ -771,17 +771,17 @@ export default function ApiExplorerPage() {
           <div
             className="flex items-start gap-3 rounded-xl p-4"
             style={{
-              background: "rgba(37, 99, 235, 0.05)",
+              background: "var(--color-info-soft)",
               border: "1px solid rgba(37, 99, 235, 0.12)",
             }}
           >
             <Info
               size={18}
               weight="fill"
-              style={{ color: "#2563eb" }}
+              style={{ color: "var(--color-info)" }}
               className="mt-0.5 shrink-0"
             />
-            <p className="text-xs" style={{ color: "#1e40af" }}>
+            <p className="text-xs" style={{ color: "var(--color-info)" }}>
               Responses shown here are example data. Connect your API key in{" "}
               <strong>Settings</strong> to send live requests to the iFeed API.
             </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Key,
   Plus,
@@ -76,9 +76,9 @@ const initialKeys: ApiKey[] = [
 
 function StatusBadge({ status }: { status: ApiKey["status"] }) {
   const styles = {
-    active: { bg: "rgba(22, 163, 74, 0.1)", color: "#16a34a" },
-    expired: { bg: "rgba(217, 119, 6, 0.1)", color: "#d97706" },
-    revoked: { bg: "rgba(220, 38, 38, 0.1)", color: "#dc2626" },
+    active: { bg: "var(--color-success-soft)", color: "var(--color-success)" },
+    expired: { bg: "var(--color-warning-soft)", color: "var(--color-warning)" },
+    revoked: { bg: "var(--color-error-soft)", color: "var(--color-error)" },
   };
   const s = styles[status];
   return (
@@ -115,6 +115,18 @@ function CreateKeyModal({
   const [name, setName] = useState("");
   const [selected, setSelected] = useState<string[]>([]);
 
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   const allPermissions = [
     "sentiment",
     "news",
@@ -131,7 +143,12 @@ function CreateKeyModal({
     );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div
         className="mx-4 w-full max-w-lg rounded-2xl p-6 shadow-2xl animate-fade-in-up"
         style={{
@@ -334,14 +351,14 @@ export default function ApiKeysPage() {
       <div
         className="flex items-start gap-3 rounded-xl p-4"
         style={{
-          background: "rgba(217, 119, 6, 0.06)",
+          background: "var(--color-warning-soft)",
           border: "1px solid rgba(217, 119, 6, 0.15)",
         }}
       >
         <Warning
           size={20}
           weight="fill"
-          style={{ color: "#d97706" }}
+          style={{ color: "var(--color-warning)" }}
           className="mt-0.5 shrink-0"
         />
         <div>
@@ -423,7 +440,7 @@ export default function ApiKeysPage() {
                   style={{
                     color:
                       copiedId === key.id
-                        ? "#16a34a"
+                        ? "var(--color-success)"
                         : "var(--color-text-muted)",
                   }}
                   title="Copy"
@@ -497,7 +514,7 @@ export default function ApiKeysPage() {
                 <button
                   onClick={() => revokeKey(key.id)}
                   className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
-                  style={{ color: "#dc2626" }}
+                  style={{ color: "var(--color-error)" }}
                 >
                   <Trash size={14} />
                   Revoke

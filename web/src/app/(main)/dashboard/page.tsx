@@ -19,9 +19,8 @@ import {
   EyeSlash,
 } from "@phosphor-icons/react";
 
-// ============================================================
-// Mock data — replace with real API calls
-// ============================================================
+type ActivityType = "success" | "warning" | "error";
+type EndpointStatus = "operational" | "degraded";
 
 const stats = [
   {
@@ -54,34 +53,34 @@ const stats = [
   },
 ];
 
-const recentActivity = [
+const recentActivity: { type: ActivityType; message: string; time: string }[] = [
   {
-    type: "success" as const,
+    type: "success",
     message: "GET /v1/sentiment/AAPL — 200 OK",
     time: "2 min ago",
   },
   {
-    type: "success" as const,
+    type: "success",
     message: "GET /v1/news/feed?limit=50 — 200 OK",
     time: "5 min ago",
   },
   {
-    type: "warning" as const,
+    type: "warning",
     message: "Rate limit warning — 85% of hourly quota",
     time: "12 min ago",
   },
   {
-    type: "success" as const,
+    type: "success",
     message: "POST /v1/webhooks/subscribe — 201 Created",
     time: "28 min ago",
   },
   {
-    type: "error" as const,
+    type: "error",
     message: "GET /v1/eod/INVALID — 404 Not Found",
     time: "1 hr ago",
   },
   {
-    type: "success" as const,
+    type: "success",
     message: "GET /v1/fundamentals/MSFT — 200 OK",
     time: "1 hr ago",
   },
@@ -108,7 +107,7 @@ const quickLinks = [
   },
 ];
 
-const endpoints = [
+const endpoints: { method: "GET" | "POST"; path: string; status: EndpointStatus }[] = [
   { method: "GET", path: "/v1/sentiment/{ticker}", status: "operational" },
   { method: "GET", path: "/v1/news/feed", status: "operational" },
   { method: "GET", path: "/v1/eod/{ticker}", status: "operational" },
@@ -159,15 +158,15 @@ function StatCard({
             style={{
               color:
                 stat.trend === "up"
-                  ? "#16a34a"
-                  : "#dc2626",
+                  ? "var(--color-success)"
+                  : "var(--color-error)",
               transform: stat.trend === "up" ? "none" : "rotate(180deg)",
             }}
           />
           <span
             className="text-xs font-semibold"
             style={{
-              color: stat.trend === "up" ? "#16a34a" : "#dc2626",
+              color: stat.trend === "up" ? "var(--color-success)" : "var(--color-error)",
             }}
           >
             {stat.change}
@@ -200,8 +199,8 @@ function ActiveKeyPreview() {
         <span
           className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase"
           style={{
-            background: "rgba(22, 163, 74, 0.1)",
-            color: "#16a34a",
+            background: "var(--color-success-soft)",
+            color: "var(--color-success)",
           }}
         >
           Active
@@ -347,25 +346,22 @@ export default function DashboardOverview() {
           >
             {recentActivity.map((item, i) => (
               <div key={i} className="flex items-center gap-3 px-4 py-3">
-                {item.type === "success" && (
+                {item.type === "success" ? (
                   <CheckCircle
                     size={18}
                     weight="fill"
-                    style={{ color: "#16a34a" }}
+                    style={{ color: "var(--color-success)" }}
                   />
-                )}
-                {item.type === "warning" && (
+                ) : (
                   <Warning
                     size={18}
                     weight="fill"
-                    style={{ color: "#d97706" }}
-                  />
-                )}
-                {item.type === "error" && (
-                  <Warning
-                    size={18}
-                    weight="fill"
-                    style={{ color: "#dc2626" }}
+                    style={{
+                      color:
+                        item.type === "warning"
+                          ? "var(--color-warning)"
+                          : "var(--color-error)",
+                    }}
                   />
                 )}
                 <p className="flex-1 truncate text-sm" style={{ fontFamily: "var(--font-mono)" }}>
@@ -403,10 +399,10 @@ export default function DashboardOverview() {
                   style={{
                     background:
                       ep.method === "GET"
-                        ? "rgba(22, 163, 74, 0.1)"
-                        : "rgba(37, 99, 235, 0.1)",
+                        ? "var(--color-success-soft)"
+                        : "var(--color-info-soft)",
                     color:
-                      ep.method === "GET" ? "#16a34a" : "#2563eb",
+                      ep.method === "GET" ? "var(--color-success)" : "var(--color-info)",
                     fontFamily: "var(--font-mono)",
                   }}
                 >
@@ -424,8 +420,8 @@ export default function DashboardOverview() {
                     style={{
                       background:
                         ep.status === "operational"
-                          ? "#16a34a"
-                          : "#d97706",
+                          ? "var(--color-success)"
+                          : "var(--color-warning)",
                     }}
                   />
                   <span
@@ -433,8 +429,8 @@ export default function DashboardOverview() {
                     style={{
                       color:
                         ep.status === "operational"
-                          ? "#16a34a"
-                          : "#d97706",
+                          ? "var(--color-success)"
+                          : "var(--color-warning)",
                     }}
                   >
                     {ep.status}

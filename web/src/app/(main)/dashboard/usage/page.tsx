@@ -6,9 +6,6 @@ import {
   Lightning,
   Clock,
   Warning,
-  ArrowUp,
-  ArrowDown,
-  Funnel,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -48,13 +45,32 @@ const summaryByPeriod: Record<
   },
 };
 
-// Simulated hourly chart data (24h)
-const hourlyData = Array.from({ length: 24 }, (_, i) => ({
-  hour: `${String(i).padStart(2, "0")}:00`,
-  requests: Math.floor(Math.random() * 800 + 200),
-  errors: Math.floor(Math.random() * 5),
-  latency: Math.floor(Math.random() * 30 + 30),
-}));
+const hourlyData = [
+  { hour: "00:00", requests: 312, errors: 1, latency: 42 },
+  { hour: "01:00", requests: 245, errors: 0, latency: 38 },
+  { hour: "02:00", requests: 198, errors: 0, latency: 35 },
+  { hour: "03:00", requests: 167, errors: 1, latency: 33 },
+  { hour: "04:00", requests: 203, errors: 0, latency: 36 },
+  { hour: "05:00", requests: 289, errors: 0, latency: 39 },
+  { hour: "06:00", requests: 456, errors: 2, latency: 44 },
+  { hour: "07:00", requests: 634, errors: 1, latency: 48 },
+  { hour: "08:00", requests: 821, errors: 3, latency: 52 },
+  { hour: "09:00", requests: 945, errors: 2, latency: 55 },
+  { hour: "10:00", requests: 878, errors: 1, latency: 51 },
+  { hour: "11:00", requests: 756, errors: 2, latency: 49 },
+  { hour: "12:00", requests: 698, errors: 1, latency: 46 },
+  { hour: "13:00", requests: 732, errors: 0, latency: 47 },
+  { hour: "14:00", requests: 845, errors: 2, latency: 50 },
+  { hour: "15:00", requests: 912, errors: 3, latency: 54 },
+  { hour: "16:00", requests: 867, errors: 1, latency: 52 },
+  { hour: "17:00", requests: 743, errors: 2, latency: 48 },
+  { hour: "18:00", requests: 621, errors: 1, latency: 45 },
+  { hour: "19:00", requests: 534, errors: 0, latency: 43 },
+  { hour: "20:00", requests: 467, errors: 1, latency: 41 },
+  { hour: "21:00", requests: 389, errors: 0, latency: 39 },
+  { hour: "22:00", requests: 345, errors: 1, latency: 37 },
+  { hour: "23:00", requests: 298, errors: 0, latency: 36 },
+];
 
 const endpointBreakdown = [
   { path: "/v1/sentiment/{ticker}", requests: 4521, pct: 35.2, avgMs: 42 },
@@ -66,12 +82,12 @@ const endpointBreakdown = [
 ];
 
 const statusCodes = [
-  { code: "200 OK", count: 12547, pct: 97.7, color: "#16a34a" },
+  { code: "200 OK", count: 12547, pct: 97.7, color: "var(--color-success)" },
   { code: "304 Not Modified", count: 154, pct: 1.2, color: "#6366f1" },
-  { code: "400 Bad Request", count: 89, pct: 0.7, color: "#d97706" },
+  { code: "400 Bad Request", count: 89, pct: 0.7, color: "var(--color-warning)" },
   { code: "404 Not Found", count: 34, pct: 0.3, color: "#f59e0b" },
-  { code: "429 Rate Limited", count: 18, pct: 0.1, color: "#dc2626" },
-  { code: "500 Server Error", count: 5, pct: 0.04, color: "#991b1b" },
+  { code: "429 Rate Limited", count: 18, pct: 0.1, color: "var(--color-error)" },
+  { code: "500 Server Error", count: 5, pct: 0.04, color: "var(--color-error)" },
 ];
 
 const rateLimitStatus = {
@@ -211,90 +227,33 @@ export default function UsagePage() {
 
       {/* Summary cards */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <div className="card p-5">
-          <div className="flex items-center gap-2">
-            <Lightning
-              size={16}
-              weight="duotone"
-              style={{ color: "var(--color-accent)" }}
-            />
-            <span
-              className="text-xs font-medium uppercase tracking-wide"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Total Requests
-            </span>
-          </div>
-          <p
-            className="mt-2 text-2xl font-bold"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {summary.requests}
-          </p>
-        </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2">
-            <Warning
-              size={16}
-              weight="duotone"
-              style={{ color: "#dc2626" }}
-            />
-            <span
-              className="text-xs font-medium uppercase tracking-wide"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Errors
-            </span>
-          </div>
-          <p
-            className="mt-2 text-2xl font-bold"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {summary.errors}
-          </p>
-        </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2">
-            <Clock
-              size={16}
-              weight="duotone"
-              style={{ color: "#2563eb" }}
-            />
-            <span
-              className="text-xs font-medium uppercase tracking-wide"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Avg Latency
-            </span>
-          </div>
-          <p
-            className="mt-2 text-2xl font-bold"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {summary.avgLatency}
-          </p>
-        </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2">
-            <ChartLine
-              size={16}
-              weight="duotone"
-              style={{ color: "#d97706" }}
-            />
-            <span
-              className="text-xs font-medium uppercase tracking-wide"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              P99 Latency
-            </span>
-          </div>
-          <p
-            className="mt-2 text-2xl font-bold"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {summary.p99Latency}
-          </p>
-        </div>
+        {([
+          { icon: Lightning, color: "var(--color-accent)", label: "Total Requests", value: summary.requests },
+          { icon: Warning, color: "var(--color-error)", label: "Errors", value: summary.errors },
+          { icon: Clock, color: "var(--color-info)", label: "Avg Latency", value: summary.avgLatency },
+          { icon: ChartLine, color: "var(--color-warning)", label: "P99 Latency", value: summary.p99Latency },
+        ] as const).map((card) => {
+          const Icon = card.icon;
+          return (
+            <div key={card.label} className="card p-5">
+              <div className="flex items-center gap-2">
+                <Icon size={16} weight="duotone" style={{ color: card.color }} />
+                <span
+                  className="text-xs font-medium uppercase tracking-wide"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {card.label}
+                </span>
+              </div>
+              <p
+                className="mt-2 text-2xl font-bold"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {card.value}
+              </p>
+            </div>
+          );
+        })}
       </div>
 
       {/* Chart + Rate limit */}
@@ -354,9 +313,9 @@ export default function UsagePage() {
                 fontFamily: "var(--font-display)",
                 color:
                   ratePct > 90
-                    ? "#dc2626"
+                    ? "var(--color-error)"
                     : ratePct > 75
-                      ? "#d97706"
+                      ? "var(--color-warning)"
                       : "var(--color-text)",
               }}
             >
@@ -375,9 +334,9 @@ export default function UsagePage() {
             max={rateLimitStatus.limit}
             color={
               ratePct > 90
-                ? "#dc2626"
+                ? "var(--color-error)"
                 : ratePct > 75
-                  ? "#d97706"
+                  ? "var(--color-warning)"
                   : "var(--color-accent)"
             }
           />
@@ -399,22 +358,22 @@ export default function UsagePage() {
               style={{
                 background:
                   ratePct > 90
-                    ? "rgba(220, 38, 38, 0.06)"
-                    : "rgba(217, 119, 6, 0.06)",
+                    ? "var(--color-error-soft)"
+                    : "var(--color-warning-soft)",
               }}
             >
               <Warning
                 size={14}
                 weight="fill"
                 style={{
-                  color: ratePct > 90 ? "#dc2626" : "#d97706",
+                  color: ratePct > 90 ? "var(--color-error)" : "var(--color-warning)",
                 }}
                 className="mt-0.5 shrink-0"
               />
               <p
                 className="text-[11px]"
                 style={{
-                  color: ratePct > 90 ? "#991b1b" : "#92400e",
+                  color: ratePct > 90 ? "var(--color-error)" : "var(--color-warning)",
                 }}
               >
                 {ratePct > 90

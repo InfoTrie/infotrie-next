@@ -8,7 +8,6 @@ import {
   Globe,
   CheckCircle,
   Envelope,
-  Info,
 } from "@phosphor-icons/react";
 
 // ============================================================
@@ -89,7 +88,7 @@ function Toggle({
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState(initialNotifications);
   const [webhookUrl, setWebhookUrl] = useState("");
-  const [defaultFormat, setDefaultFormat] = useState("json");
+  const [defaultFormat, setDefaultFormat] = useState<"json" | "csv" | "xml">("json");
   const [timezone, setTimezone] = useState("UTC");
   const [saved, setSaved] = useState(false);
 
@@ -148,7 +147,7 @@ export default function SettingsPage() {
               Default response format
             </label>
             <div className="flex gap-2">
-              {["json", "csv", "xml"].map((fmt) => (
+              {(["json", "csv", "xml"] as const).map((fmt) => (
                 <button
                   key={fmt}
                   onClick={() => setDefaultFormat(fmt)}
@@ -395,7 +394,7 @@ export default function SettingsPage() {
         {saved && (
           <span
             className="flex items-center gap-1.5 text-sm font-medium animate-fade-in"
-            style={{ color: "#16a34a" }}
+            style={{ color: "var(--color-success)" }}
           >
             <CheckCircle size={16} weight="fill" />
             Settings saved
