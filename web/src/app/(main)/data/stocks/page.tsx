@@ -7,7 +7,6 @@ import {
   ChartLine,
   MagnifyingGlass,
   ArrowLeft,
-  Download,
   Database,
   Globe,
   Buildings,
@@ -16,10 +15,6 @@ import {
   CaretUp,
   SortAscending,
 } from "@/lib/icons";
-
-// ============================================================
-// TYPES
-// ============================================================
 
 interface StockRecord {
   id: number;
@@ -54,10 +49,6 @@ interface StockRecord {
   symbol_map_bb: string;
   symbol_map_rt: string;
 }
-
-// ============================================================
-// SAMPLE DATA
-// ============================================================
 
 const stockData: StockRecord[] = [
   {
@@ -128,10 +119,6 @@ const stockData: StockRecord[] = [
   },
 ];
 
-// ============================================================
-// COLUMN DEFINITIONS
-// ============================================================
-
 const columns: { key: keyof StockRecord; label: string }[] = [
   { key: "id", label: "#" },
   { key: "company_id", label: "Company ID" },
@@ -166,9 +153,21 @@ const columns: { key: keyof StockRecord; label: string }[] = [
   { key: "symbol_map_rt", label: "Symbol Map (RT)" },
 ];
 
-// ============================================================
-// KEY STATS
-// ============================================================
+const ESSENTIAL_COLUMNS: ReadonlySet<keyof StockRecord> = new Set([
+  "id",
+  "symbol_code",
+  "symbol_name",
+  "exchange",
+  "country_name",
+  "currency",
+]);
+
+const MONO_FIELDS: ReadonlySet<keyof StockRecord> = new Set([
+  "isin",
+  "sedol",
+  "cusip",
+  "concat",
+]);
 
 const keyStats = [
   { value: "31", label: "Data Fields" },
@@ -176,10 +175,6 @@ const keyStats = [
   { value: "Multi", label: "Source Mapping" },
   { value: "Real-time", label: "Session Tracking" },
 ];
-
-// ============================================================
-// HERO SECTION
-// ============================================================
 
 function Hero() {
   return (
@@ -269,10 +264,6 @@ function Hero() {
   );
 }
 
-// ============================================================
-// STOCK DATA TABLE SECTION
-// ============================================================
-
 type SortDirection = "asc" | "desc";
 
 function StockTable() {
@@ -327,9 +318,7 @@ function StockTable() {
         subtitle="Browse and search stock symbol records with full field visibility"
       />
 
-      {/* Controls */}
       <div className="mb-6 flex flex-wrap items-center gap-4">
-        {/* Search */}
         <div
           className="flex flex-1 items-center gap-2 rounded-lg border px-4 py-2"
           style={{
@@ -352,7 +341,6 @@ function StockTable() {
           />
         </div>
 
-        {/* Column filter toggle */}
         <button
           onClick={() => setShowColumnFilter((v) => !v)}
           className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm transition-colors hover:opacity-80"
@@ -367,7 +355,6 @@ function StockTable() {
         </button>
       </div>
 
-      {/* Column filter panel */}
       {showColumnFilter && (
         <div
           className="mb-6 rounded-lg border p-4"
@@ -396,16 +383,7 @@ function StockTable() {
               <span style={{ color: "var(--color-border)" }}>|</span>
               <button
                 onClick={() =>
-                  setVisibleColumns(
-                    new Set<keyof StockRecord>([
-                      "id",
-                      "symbol_code",
-                      "symbol_name",
-                      "exchange",
-                      "country_name",
-                      "currency",
-                    ])
-                  )
+                  setVisibleColumns(new Set(ESSENTIAL_COLUMNS))
                 }
                 className="text-xs transition-colors hover:opacity-80"
                 style={{ color: "var(--color-accent)" }}
@@ -439,7 +417,6 @@ function StockTable() {
         </div>
       )}
 
-      {/* Table */}
       <div
         className="overflow-x-auto rounded-xl border"
         style={{ borderColor: "var(--color-border)" }}
@@ -487,17 +464,10 @@ function StockTable() {
               filteredData.map((row) => (
                 <tr
                   key={row.id}
-                  className="transition-colors"
+                  className="transition-colors hover:bg-[var(--color-secondary)]"
                   style={{
                     borderBottom: "1px solid var(--color-border)",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background =
-                      "var(--color-secondary)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = "transparent")
-                  }
                 >
                   {activeColumns.map((col) => (
                     <td
@@ -505,13 +475,9 @@ function StockTable() {
                       className="whitespace-nowrap px-4 py-3"
                       style={{
                         color: "var(--color-text)",
-                        fontFamily:
-                          col.key === "isin" ||
-                          col.key === "sedol" ||
-                          col.key === "cusip" ||
-                          col.key === "concat"
-                            ? "var(--font-mono)"
-                            : undefined,
+                        fontFamily: MONO_FIELDS.has(col.key)
+                          ? "var(--font-mono)"
+                          : undefined,
                       }}
                     >
                       {String(row[col.key])}
@@ -524,7 +490,6 @@ function StockTable() {
         </table>
       </div>
 
-      {/* Footer info */}
       <div
         className="mt-4 flex items-center justify-between text-xs"
         style={{ color: "var(--color-text-muted)" }}
@@ -537,10 +502,6 @@ function StockTable() {
     </Section>
   );
 }
-
-// ============================================================
-// DATA COVERAGE SECTION
-// ============================================================
 
 const dataCoverage: {
   title: string;
@@ -621,10 +582,6 @@ function DataCoverage() {
   );
 }
 
-// ============================================================
-// FIELD REFERENCE SECTION
-// ============================================================
-
 function FieldReference() {
   return (
     <Section>
@@ -669,10 +626,6 @@ function FieldReference() {
     </Section>
   );
 }
-
-// ============================================================
-// MAIN PAGE
-// ============================================================
 
 export default function StockDashboardPage() {
   return (
