@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Section, SectionHeader } from "@/components/Section";
+import { FieldReferenceGrid } from "@/components/FieldReferenceGrid";
 import {
   ChartLine,
   MagnifyingGlass,
@@ -15,6 +16,7 @@ import {
   CaretUp,
   SortAscending,
 } from "@/lib/icons";
+import type { Icon } from "@/lib/icons";
 
 interface StockRecord {
   id: number;
@@ -506,7 +508,7 @@ function StockTable() {
 const dataCoverage: {
   title: string;
   description: string;
-  icon: typeof Globe;
+  icon: Icon;
 }[] = [
   {
     title: "Exchange Identifiers",
@@ -582,58 +584,16 @@ function DataCoverage() {
   );
 }
 
-function FieldReference() {
-  return (
-    <Section>
-      <SectionHeader
-        title="Field Reference"
-        subtitle="Complete list of all 31 data fields available in the stock symbol dataset"
-      />
-      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {columns.map((col) => (
-          <div
-            key={col.key}
-            className="flex items-center gap-3 rounded-lg border px-4 py-3"
-            style={{
-              borderColor: "var(--color-border)",
-              background: "var(--color-surface)",
-            }}
-          >
-            <div
-              className="h-2 w-2 flex-shrink-0 rounded-full"
-              style={{ background: "var(--color-accent)" }}
-            />
-            <div>
-              <div
-                className="text-sm font-medium"
-                style={{ color: "var(--color-text)" }}
-              >
-                {col.label}
-              </div>
-              <div
-                className="text-xs"
-                style={{
-                  color: "var(--color-text-muted)",
-                  fontFamily: "var(--font-mono)",
-                }}
-              >
-                {col.key}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
 export default function StockDashboardPage() {
   return (
     <>
       <Hero />
       <StockTable />
       <DataCoverage />
-      <FieldReference />
+      <FieldReferenceGrid
+        columns={columns}
+        subtitle="Complete list of all 31 data fields available in the stock symbol dataset"
+      />
     </>
   );
 }

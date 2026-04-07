@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Section, SectionHeader } from "@/components/Section";
+import { FieldReferenceGrid } from "@/components/FieldReferenceGrid";
 import {
   TrendUp,
   MagnifyingGlass,
@@ -20,6 +21,10 @@ import {
   ChartBar,
   ArrowsClockwise,
 } from "@/lib/icons";
+import type { Icon } from "@/lib/icons";
+
+const SOURCES = ["investing", "ft", "cnbc", "bloomberg", "reuters", "eodh"] as const;
+type Source = (typeof SOURCES)[number];
 
 interface DailyPriceRecord {
   id: number;
@@ -42,14 +47,11 @@ interface DailyPriceRecord {
   dividend_yield: number | null;
   exchange: string;
   currency: string;
-  source: string;
+  source: Source;
   source_symbol: string;
   fetch_timestamp: string;
   batch_id: string;
 }
-
-const SOURCES = ["investing", "ft", "cnbc", "bloomberg", "reuters", "eodh"] as const;
-type Source = (typeof SOURCES)[number];
 
 const SOURCE_LABELS: Record<Source, string> = {
   investing: "Investing.com",
@@ -693,7 +695,7 @@ const dataSources: {
   name: string;
   key: Source;
   description: string;
-  icon: typeof Globe;
+  icon: Icon;
 }[] = [
   {
     name: "Investing.com",
@@ -792,7 +794,7 @@ const pipelineSteps: {
   step: number;
   title: string;
   description: string;
-  icon: typeof Globe;
+  icon: Icon;
 }[] = [
   {
     step: 1,
@@ -884,51 +886,6 @@ function Pipeline() {
   );
 }
 
-function FieldReference() {
-  return (
-    <Section variant="alt">
-      <SectionHeader
-        title="Field Reference"
-        subtitle="All 24 fields available in the daily stock price dataset"
-      />
-      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {columns.map((col) => (
-          <div
-            key={col.key}
-            className="flex items-center gap-3 rounded-lg border px-4 py-3"
-            style={{
-              borderColor: "var(--color-border)",
-              background: "var(--color-surface)",
-            }}
-          >
-            <div
-              className="h-2 w-2 flex-shrink-0 rounded-full"
-              style={{ background: "var(--color-accent)" }}
-            />
-            <div>
-              <div
-                className="text-sm font-medium"
-                style={{ color: "var(--color-text)" }}
-              >
-                {col.label}
-              </div>
-              <div
-                className="text-xs"
-                style={{
-                  color: "var(--color-text-muted)",
-                  fontFamily: "var(--font-mono)",
-                }}
-              >
-                {col.key}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
 export default function StockPricesPage() {
   return (
     <>
@@ -936,7 +893,11 @@ export default function StockPricesPage() {
       <PriceTable />
       <DataSources />
       <Pipeline />
-      <FieldReference />
+      <FieldReferenceGrid
+        columns={columns}
+        subtitle="All 24 fields available in the daily stock price dataset"
+        variant="alt"
+      />
     </>
   );
 }
