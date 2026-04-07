@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Check,
@@ -49,6 +49,30 @@ type Plan = {
   ctaVariant: "primary" | "secondary" | "enterprise";
 };
 
+const LIMIT_LABELS: Record<keyof Plan["limits"], string> = {
+  requestsPerHour: "Requests/hour",
+  apiKeys: "API Keys",
+  dataHistory: "Data History",
+  support: "Support",
+  webhooks: "Webhooks",
+  sla: "Uptime SLA",
+};
+
+const FEATURE_LABELS = [
+  "Sentiment Analysis API",
+  "News Feed API",
+  "End of Day Prices",
+  "Fundamentals API",
+  "Corporate Actions API",
+  "Webhook Subscriptions",
+  "SEC & Regulatory Filings",
+  "Custom Data Pipelines",
+] as const;
+
+function makeFeatures(included: boolean[]): Plan["features"] {
+  return FEATURE_LABELS.map((label, i) => ({ label, included: included[i] }));
+}
+
 const plans: Plan[] = [
   {
     id: "starter",
@@ -58,16 +82,7 @@ const plans: Plan[] = [
     monthlyPrice: 49,
     annualPrice: 39,
     stripePriceId: "price_starter_monthly",
-    features: [
-      { label: "Sentiment Analysis API", included: true },
-      { label: "News Feed API", included: true },
-      { label: "End of Day Prices", included: true },
-      { label: "Fundamentals API", included: false },
-      { label: "Corporate Actions API", included: false },
-      { label: "Webhook Subscriptions", included: false },
-      { label: "SEC & Regulatory Filings", included: false },
-      { label: "Custom Data Pipelines", included: false },
-    ],
+    features: makeFeatures([true, true, true, false, false, false, false, false]),
     limits: {
       requestsPerHour: "1,000",
       apiKeys: "2",
@@ -88,16 +103,7 @@ const plans: Plan[] = [
     annualPrice: 249,
     stripePriceId: "price_pro_monthly",
     highlighted: true,
-    features: [
-      { label: "Sentiment Analysis API", included: true },
-      { label: "News Feed API", included: true },
-      { label: "End of Day Prices", included: true },
-      { label: "Fundamentals API", included: true },
-      { label: "Corporate Actions API", included: true },
-      { label: "Webhook Subscriptions", included: true },
-      { label: "SEC & Regulatory Filings", included: false },
-      { label: "Custom Data Pipelines", included: false },
-    ],
+    features: makeFeatures([true, true, true, true, true, true, false, false]),
     limits: {
       requestsPerHour: "10,000",
       apiKeys: "5",
@@ -117,16 +123,7 @@ const plans: Plan[] = [
     monthlyPrice: 999,
     annualPrice: 849,
     stripePriceId: "price_enterprise_monthly",
-    features: [
-      { label: "Sentiment Analysis API", included: true },
-      { label: "News Feed API", included: true },
-      { label: "End of Day Prices", included: true },
-      { label: "Fundamentals API", included: true },
-      { label: "Corporate Actions API", included: true },
-      { label: "Webhook Subscriptions", included: true },
-      { label: "SEC & Regulatory Filings", included: true },
-      { label: "Custom Data Pipelines", included: false },
-    ],
+    features: makeFeatures([true, true, true, true, true, true, true, false]),
     limits: {
       requestsPerHour: "100,000",
       apiKeys: "20",
@@ -145,16 +142,7 @@ const plans: Plan[] = [
     icon: Handshake,
     monthlyPrice: null,
     annualPrice: null,
-    features: [
-      { label: "Sentiment Analysis API", included: true },
-      { label: "News Feed API", included: true },
-      { label: "End of Day Prices", included: true },
-      { label: "Fundamentals API", included: true },
-      { label: "Corporate Actions API", included: true },
-      { label: "Webhook Subscriptions", included: true },
-      { label: "SEC & Regulatory Filings", included: true },
-      { label: "Custom Data Pipelines", included: true },
-    ],
+    features: makeFeatures([true, true, true, true, true, true, true, true]),
     limits: {
       requestsPerHour: "Custom",
       apiKeys: "Unlimited",
@@ -167,6 +155,8 @@ const plans: Plan[] = [
     ctaVariant: "enterprise",
   },
 ];
+
+const currentPlan = plans.find((p) => p.id === "professional")!;
 
 // Mock current subscription
 const currentSubscription = {
@@ -321,24 +311,16 @@ function PlanCard({
           className="mt-5 space-y-2 rounded-lg p-4"
           style={{ background: "var(--color-tertiary)" }}
         >
-          {Object.entries(plan.limits).map(([key, value]) => (
-            <div key={key} className="flex items-center justify-between text-xs">
-              <span style={{ color: "var(--color-text-muted)" }}>
-                {key === "requestsPerHour"
-                  ? "Requests/hour"
-                  : key === "apiKeys"
-                    ? "API Keys"
-                    : key === "dataHistory"
-                      ? "Data History"
-                      : key === "support"
-                        ? "Support"
-                        : key === "webhooks"
-                          ? "Webhooks"
-                          : "Uptime SLA"}
-              </span>
-              <span className="font-semibold">{value}</span>
-            </div>
-          ))}
+          {(Object.entries(plan.limits) as [keyof Plan["limits"], string][]).map(
+            ([key, value]) => (
+              <div key={key} className="flex items-center justify-between text-xs">
+                <span style={{ color: "var(--color-text-muted)" }}>
+                  {LIMIT_LABELS[key]}
+                </span>
+                <span className="font-semibold">{value}</span>
+              </div>
+            )
+          )}
         </div>
 
         {/* Features */}
@@ -417,8 +399,7 @@ function PlanCard({
 }
 
 function SubscriptionOverview() {
-  const plan = plans.find((p) => p.id === currentSubscription.planId)!;
-  const Icon = plan.icon;
+  const Icon = currentPlan.icon;
   const [showInvoices, setShowInvoices] = useState(false);
 
   return (
@@ -452,14 +433,14 @@ function SubscriptionOverview() {
               />
             </div>
             <div>
-              <p className="font-semibold">{plan.name} Plan</p>
+              <p className="font-semibold">{currentPlan.name} Plan</p>
               <p
                 className="text-xs"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 ${currentSubscription.billingCycle === "monthly"
-                  ? plan.monthlyPrice
-                  : plan.annualPrice}
+                  ? currentPlan.monthlyPrice
+                  : currentPlan.annualPrice}
                 /month · Billed {currentSubscription.billingCycle}
               </p>
             </div>
@@ -678,9 +659,14 @@ export default function PlansPage() {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [upgradeTarget, setUpgradeTarget] = useState<Plan | null>(null);
 
-  const handleSelectPlan = (plan: Plan) => {
-    setUpgradeTarget(plan);
-  };
+  useEffect(() => {
+    if (!upgradeTarget) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setUpgradeTarget(null);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [upgradeTarget]);
 
   const confirmUpgrade = () => {
     // TODO: Integrate with Stripe Checkout
@@ -785,7 +771,7 @@ export default function PlansPage() {
             plan={plan}
             billingCycle={billingCycle}
             isCurrent={plan.id === currentSubscription.planId}
-            onSelect={handleSelectPlan}
+            onSelect={setUpgradeTarget}
           />
         ))}
       </div>
@@ -839,7 +825,7 @@ export default function PlansPage() {
             >
               You are switching from{" "}
               <strong>
-                {plans.find((p) => p.id === currentSubscription.planId)?.name}
+                {currentPlan.name}
               </strong>{" "}
               to <strong>{upgradeTarget.name}</strong>.
             </p>
