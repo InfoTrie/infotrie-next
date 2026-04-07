@@ -9,6 +9,7 @@ import {
   ChartLine,
   Gear,
   CaretLeft,
+  CreditCard,
 } from "@phosphor-icons/react";
 
 const sidebarLinks = [
@@ -16,6 +17,7 @@ const sidebarLinks = [
   { href: "/dashboard/api-keys", label: "API Keys", icon: Key },
   { href: "/dashboard/explorer", label: "API Explorer", icon: Plug },
   { href: "/dashboard/usage", label: "Usage", icon: ChartLine },
+  { href: "/dashboard/plans", label: "Plans & Billing", icon: CreditCard },
   { href: "/dashboard/settings", label: "Settings", icon: Gear },
 ];
 
