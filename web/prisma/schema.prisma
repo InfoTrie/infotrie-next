@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model StockSymbol {
+  id                     Int     @id @default(autoincrement())
+  company_id             Int?
+  symbol_code            String
+  symbol_name            String?
+  exchange               String?
+  exchange_code          String?
+  mic                    String?
+  operating_mic          String?
+  oprt_sgmt              String?
+  oprt_sgmt_1            String?
+  symbol_type            String?
+  country_name           String?
+  isin                   String?
+  cusip                  String?
+  exchange_name          String?
+  session_end_local      String?
+  session_end_est        String?
+  batch_no               String?
+  exchange_code_investing String?
+  symbol_map_inv         String?
+  region                 String?
+  sedol                  String?
+  currency               String?
+  concat                 String?
+  source                 String?
+  symbol_map_ft          String?
+  symbol_map_cnbc        String?
+  symbol_map_exchange    String?
+  symbol_map_eodh        String?
+  symbol_map_bb          String?
+  symbol_map_rt          String?
+
+  @@map("stock_symbols")
+}
+
+model DailyStockPrice {
+  id                   Int      @id @default(autoincrement())
+  symbol_code          String
+  symbol_name          String?
+  date                 DateTime
+  open                 Float?
+  high                 Float?
+  low                  Float?
+  close                Float?
+  adjusted_close       Float?
+  volume               Float?
+  change               Float?
+  change_pct           Float?
+  previous_close       Float?
+  fifty_two_week_high  Float?
+  fifty_two_week_low   Float?
+  market_cap           String?
+  pe_ratio             Float?
+  dividend_yield       Float?
+  exchange             String?
+  currency             String?
+  source               String?
+  source_symbol        String?
+  fetch_timestamp      DateTime?
+  batch_id             String?
+
+  @@map("daily_stock_prices")
+}

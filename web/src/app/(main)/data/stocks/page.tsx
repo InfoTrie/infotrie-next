@@ -15,6 +15,7 @@ import {
   CaretDown,
   CaretUp,
   SortAscending,
+  TrendUp,
 } from "@/lib/icons";
 import type { Icon } from "@/lib/icons";
 
@@ -230,6 +231,17 @@ function Hero() {
               Comprehensive stock symbol data with exchange mappings, session
               times, and multi-source symbol identifiers across global markets.
             </p>
+            <Link
+              href="/data/stock-prices"
+              className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition-colors hover:opacity-90"
+              style={{
+                background: "var(--color-accent)",
+                color: "#fff",
+              }}
+            >
+              <TrendUp size={16} weight="bold" />
+              View Daily Prices
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
