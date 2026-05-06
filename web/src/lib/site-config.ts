@@ -248,6 +248,18 @@ export const dataCategories = [
     short: "Annual reports, ownership, 13F filings, and more",
     icon: "clipboard-text",
   },
+  {
+    slug: "stocks",
+    name: "Stock Symbols",
+    short: "Global stock symbol directory with exchange mappings and identifiers",
+    icon: "chart-line",
+  },
+  {
+    slug: "stock-prices",
+    name: "Daily Stock Prices",
+    short: "Daily OHLCV prices from multiple sources across global markets",
+    icon: "chart-bar",
+  },
 ];
 
 // ============================================================
